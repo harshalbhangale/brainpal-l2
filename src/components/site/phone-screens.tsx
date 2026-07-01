@@ -34,9 +34,9 @@ function ScreenShell({
   children: ReactNode;
 }) {
   return (
-    <div className="flex h-full w-full flex-col gap-3 px-4 pb-4 pt-[10%]" style={{ background: tint }}>
+    <div className="flex h-full w-full flex-col gap-3 px-4 pb-4 pt-[15%]" style={{ background: tint }}>
       <div className="flex items-center justify-between">
-        <BrandLogo size="sm" tone={dark ? "dark" : "light"} />
+        <BrandLogo size="xs" tone={dark ? "dark" : "light"} />
         <div className="flex items-center gap-2">
           <span className={cn("font-mono text-[11px] font-semibold", dark ? "text-white/60" : "text-ink-3")}>{time}</span>
           <Face seed="Oliver" className="size-7 ring-1 ring-black/5" alt="Oliver" />

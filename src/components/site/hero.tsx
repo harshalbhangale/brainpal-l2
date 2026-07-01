@@ -103,32 +103,33 @@ export function Hero() {
               <PhoneMockup />
             </div>
 
-            {/* floating PAL avatars (gsap scales the wrapper, CSS floats the inner) */}
-            <div className="hero-float absolute -left-8 top-16">
+            {/* floating PALs — anchored beside the phone (left-full / right-full),
+                so they never cover the screen. gsap scales the wrapper, CSS floats the inner. */}
+            <div className="hero-float absolute right-full top-16 mr-2 hidden sm:block">
               <div className="animate-float" style={{ animationDelay: "0.4s" }}>
-                <PalAvatar palKey="study" size="lg" className="rotate-[-8deg]" />
+                <PalAvatar palKey="study" size="md" className="rotate-[-8deg]" />
               </div>
             </div>
-            <div className="hero-float absolute -right-7 top-40">
+            <div className="hero-float absolute right-full bottom-24 mr-2 hidden sm:block">
+              <div className="animate-float" style={{ animationDelay: "1.7s" }}>
+                <PalAvatar palKey="parent" size="sm" className="rotate-[6deg]" />
+              </div>
+            </div>
+            <div className="hero-float absolute left-full top-40 ml-2 hidden sm:block">
               <div className="animate-float" style={{ animationDelay: "1.1s" }}>
                 <PalAvatar palKey="tutor" size="md" className="rotate-[10deg]" />
               </div>
             </div>
-            <div className="hero-float absolute -left-6 bottom-28">
-              <div className="animate-float" style={{ animationDelay: "1.7s" }}>
-                <PalAvatar palKey="parent" size="md" className="rotate-[6deg]" />
-              </div>
-            </div>
 
-            {/* floating chips */}
-            <div className="hero-float absolute -right-10 top-6 flex items-center gap-2 rounded-2xl bg-white px-3 py-2 shadow-soft ring-1 ring-border sm:-right-14">
+            {/* floating chips — beside the phone on wide screens only */}
+            <div className="hero-float absolute left-full top-8 ml-2 hidden items-center gap-2 whitespace-nowrap rounded-2xl bg-white px-3 py-2 shadow-soft ring-1 ring-border lg:flex">
               <span className="grid size-7 place-items-center rounded-full bg-brand-soft text-brand">
                 <ShieldCheck className="size-4" />
               </span>
               <span className="text-xs font-bold text-ink">Parent-approved</span>
             </div>
 
-            <div className="hero-float absolute -left-12 bottom-10 flex items-center gap-2 rounded-2xl bg-white px-3 py-2 shadow-soft ring-1 ring-border sm:-left-16">
+            <div className="hero-float absolute bottom-10 left-full ml-2 hidden items-center gap-2 whitespace-nowrap rounded-2xl bg-white px-3 py-2 shadow-soft ring-1 ring-border lg:flex">
               <BrainCoin size={26} />
               <span className="text-xs font-bold text-ink">+50 Brains</span>
             </div>

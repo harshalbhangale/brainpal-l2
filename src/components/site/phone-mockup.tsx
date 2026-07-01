@@ -8,10 +8,10 @@ import { cn } from "@/lib/utils";
 /** Oliver's home screen — the content rendered inside the iPhone frame. */
 export function PhoneScreen() {
   return (
-    <div className="flex h-full w-full flex-col gap-3 bg-gradient-to-b from-white to-lime-soft/50 px-4 pb-4 pt-[10%]">
+    <div className="flex h-full w-full flex-col gap-3 bg-gradient-to-b from-white to-lime-soft/50 px-4 pb-4 pt-[15%]">
       {/* header */}
       <div className="flex items-center justify-between">
-        <BrandLogo size="sm" />
+        <BrandLogo size="xs" />
         <Face seed="Oliver" className="size-8 ring-1 ring-black/5" alt="Oliver" />
       </div>
 

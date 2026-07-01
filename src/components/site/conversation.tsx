@@ -12,107 +12,106 @@ import {
   Wallet,
   GraduationCap,
   Users,
+  ChevronsDown,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { BrainMark } from "@/components/brand/logo";
 import { BrainCoin } from "@/components/brand/scenes";
 import { Face } from "@/components/brand/face";
-import { SectionHeading } from "@/components/brand/section-heading";
+import { DeviceFrame } from "@/components/brand/device-frame";
+import { Kicker } from "@/components/brand/section-heading";
 import { cn } from "@/lib/utils";
-import type { ReactNode } from "react";
 
+/* ── PALs ─────────────────────────────────────────────────────────────── */
 type PalId = "money" | "parent" | "study";
-const PAL: Record<PalId, { name: string; color: string; icon: LucideIcon; onDark: boolean }> = {
-  money: { name: "MoneyPal", color: "var(--money)", icon: Wallet, onDark: false },
-  parent: { name: "ParentPal", color: "var(--parent)", icon: Users, onDark: false },
-  study: { name: "StudyPal", color: "var(--study)", icon: GraduationCap, onDark: false },
+const PAL: Record<PalId, { name: string; role: string; color: string; icon: LucideIcon }> = {
+  money: { name: "MoneyPal", role: "Financial coach", color: "var(--money)", icon: Wallet },
+  parent: { name: "ParentPal", role: "Family coordinator", color: "var(--parent)", icon: Users },
+  study: { name: "StudyPal", role: "Study companion", color: "var(--study)", icon: GraduationCap },
 };
+const CAST: PalId[] = ["money", "parent", "study"];
 
 function PalCircle({ pal, className }: { pal: PalId; className?: string }) {
   const p = PAL[pal];
   const Icon = p.icon;
   return (
     <span
-      className={cn("grid size-7 shrink-0 place-items-center rounded-full", p.onDark ? "text-white" : "text-ink", className)}
+      className={cn("grid size-7 shrink-0 place-items-center rounded-full text-ink", className)}
       style={{ background: `linear-gradient(135deg, color-mix(in srgb, ${p.color} 80%, white), ${p.color})` }}
     >
-      <Icon className="size-3.5" strokeWidth={2.5} />
+      <Icon className="size-[55%]" strokeWidth={2.5} />
     </span>
   );
 }
 
-/* ── inline app component cards (the upgrade) ─────────────────────────────── */
-function CardShell({ children }: { children: ReactNode }) {
-  return <div className="ml-9 max-w-[85%] rounded-2xl bg-white p-3.5 shadow-soft ring-1 ring-border">{children}</div>;
-}
-
+/* ── inline app-component cards (compact, phone-friendly) ─────────────────── */
 function GoalCard() {
   return (
-    <CardShell>
-      <div className="flex items-center gap-2.5">
-        <span className="grid size-9 place-items-center rounded-xl bg-money-soft text-money-ink"><Target className="size-[18px]" /></span>
+    <div className="rounded-2xl bg-white p-3 shadow-soft ring-1 ring-border">
+      <div className="flex items-center gap-2">
+        <span className="grid size-8 place-items-center rounded-lg bg-money-soft text-money-ink"><Target className="size-4" /></span>
         <div className="min-w-0 flex-1">
-          <p className="text-[13px] font-bold text-ink">LEGO Star Destroyer</p>
-          <p className="text-[11px] text-ink-3">Savings goal</p>
+          <p className="truncate text-[12px] font-bold text-ink">LEGO Star Destroyer</p>
+          <p className="text-[10px] text-ink-3">Savings goal · $30 / $45</p>
         </div>
-        <span className="font-mono text-[13px] font-bold text-ink">$30 / $45</span>
       </div>
-      <div className="mt-2.5 h-2 overflow-hidden rounded-full bg-secondary">
+      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-secondary">
         <div className="h-full w-[66%] rounded-full" style={{ backgroundImage: "var(--grad-lime)" }} />
       </div>
-      <div className="mt-2.5 flex items-center justify-between">
-        <span className="text-[11px] text-ink-3">$15 to go</span>
-        <span className="rounded-full bg-lime-soft px-2.5 py-1 text-[11px] font-bold text-money-ink">Set goal · $15</span>
+      <div className="mt-2 flex items-center justify-between">
+        <span className="text-[10px] text-ink-3">$15 to go</span>
+        <span className="rounded-full bg-lime-soft px-2 py-0.5 text-[10px] font-bold text-money-ink">Set goal</span>
       </div>
-    </CardShell>
+    </div>
   );
 }
 
 function ChoreCard() {
   return (
-    <CardShell>
-      <div className="flex items-center gap-2.5">
-        <span className="grid size-9 place-items-center rounded-xl bg-parent-soft text-parent"><ListChecks className="size-[18px]" /></span>
+    <div className="rounded-2xl bg-white p-3 shadow-soft ring-1 ring-border">
+      <div className="flex items-center gap-2">
+        <span className="grid size-8 place-items-center rounded-lg bg-parent-soft text-parent"><ListChecks className="size-4" /></span>
         <div className="min-w-0 flex-1">
-          <p className="text-[13px] font-bold text-ink">Organise the garage</p>
-          <p className="text-[11px] text-ink-3">This weekend · Oli</p>
+          <p className="truncate text-[12px] font-bold text-ink">Organise the garage</p>
+          <p className="text-[10px] text-ink-3">This weekend · Oli</p>
         </div>
-        <span className="inline-flex items-center gap-1 rounded-full bg-lime-soft px-2 py-1 text-[11px] font-bold text-money-ink">
-          <BrainCoin size={12} spin={false} /> +$15
+        <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-lime-soft px-2 py-0.5 text-[10px] font-bold text-money-ink">
+          <BrainCoin size={11} spin={false} /> +$15
         </span>
       </div>
-      <div className="mt-2.5 flex items-center gap-1.5 rounded-xl bg-secondary px-2.5 py-2 text-[11px] font-semibold text-ink-2">
-        <Camera className="size-3.5 text-parent" /> Verify with a photo when it&apos;s done
+      <div className="mt-2 flex items-center gap-1.5 rounded-lg bg-secondary px-2 py-1.5 text-[10px] font-semibold text-ink-2">
+        <Camera className="size-3 shrink-0 text-parent" /> Verify with a photo when done
       </div>
-    </CardShell>
+    </div>
   );
 }
 
 function FlashcardCard() {
   return (
-    <CardShell>
-      <div className="flex items-center gap-2.5">
-        <span className="grid size-9 place-items-center rounded-xl bg-study-soft text-study"><BookOpen className="size-[18px]" /></span>
+    <div className="rounded-2xl bg-white p-3 shadow-soft ring-1 ring-border">
+      <div className="flex items-center gap-2">
+        <span className="grid size-8 place-items-center rounded-lg bg-study-soft text-study"><BookOpen className="size-4" /></span>
         <div className="min-w-0 flex-1">
-          <p className="text-[13px] font-bold text-ink">Photosynthesis</p>
-          <p className="text-[11px] text-ink-3">On tomorrow&apos;s quiz</p>
+          <p className="truncate text-[12px] font-bold text-ink">Photosynthesis</p>
+          <p className="text-[10px] text-ink-3">On tomorrow&apos;s quiz</p>
         </div>
       </div>
-      <div className="mt-2.5 flex flex-wrap gap-1.5">
-        <span className="rounded-full bg-secondary px-2.5 py-1 text-[11px] font-semibold text-ink-2">5 flashcards</span>
-        <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1 text-[11px] font-semibold text-ink-2">
-          <CalendarClock className="size-3 text-study" /> Live interview · 4pm
+      <div className="mt-2 flex flex-wrap gap-1.5">
+        <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-semibold text-ink-2">5 flashcards</span>
+        <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-0.5 text-[10px] font-semibold text-ink-2">
+          <CalendarClock className="size-3 text-study" /> Live · 4pm
         </span>
       </div>
-      <span className="mt-2.5 flex w-full items-center justify-center rounded-full py-2 text-[12px] font-bold text-white" style={{ background: "var(--study)" }}>
+      <span className="mt-2 flex w-full items-center justify-center rounded-full py-1.5 text-[11px] font-bold text-white" style={{ background: "var(--study)" }}>
         Practise now
       </span>
-    </CardShell>
+    </div>
   );
 }
 
-/* ── steps ─────────────────────────────────────────────────────────────── */
+/* ── the script ───────────────────────────────────────────────────────── */
 type Step =
   | { kind: "user"; who: "Oliver" | "Parent"; text: string }
   | { kind: "pal"; pal: PalId; text: string }
@@ -126,139 +125,232 @@ const STEPS: Step[] = [
   { kind: "pal", pal: "parent", text: "Done. $15 bonus if you help organise the garage this weekend." },
   { kind: "card", render: () => <ChoreCard /> },
   { kind: "user", who: "Oliver", text: "Also — help me revise science." },
-  {
-    kind: "pal",
-    pal: "study",
-    text: "Based on your previous tests, photosynthesis is on tomorrow's quiz. Want flashcards to practise?",
-  },
+  { kind: "pal", pal: "study", text: "Based on your previous tests, photosynthesis is on tomorrow's quiz. Want flashcards to practise?" },
   { kind: "card", render: () => <FlashcardCard /> },
 ];
 
+/* ── shared message renderer ──────────────────────────────────────────── */
+function Messages({ variant }: { variant: "phone" | "wide" }) {
+  const phone = variant === "phone";
+  const bubble = phone ? "max-w-[82%] px-3 py-2 text-[12px]" : "max-w-[80%] px-4 py-2.5 text-[15px]";
+  const faceSize = phone ? "size-7" : "size-9";
+  const indent = phone ? "ml-8" : "ml-9";
+
+  return (
+    <>
+      {STEPS.map((step, i) => {
+        if (step.kind === "user") {
+          const isOliver = step.who === "Oliver";
+          return (
+            <div key={i} className="flex items-end justify-end gap-2">
+              <div
+                className={cn(
+                  "whitespace-pre-wrap rounded-3xl rounded-br-md font-medium leading-snug",
+                  bubble,
+                  isOliver ? "text-ink" : "bg-ink text-white/95"
+                )}
+                style={isOliver ? { backgroundImage: "var(--grad-lime)" } : undefined}
+              >
+                {step.text}
+              </div>
+              <Face seed={step.who} className={cn("shrink-0 shadow-soft ring-1 ring-border", faceSize)} alt={step.who} />
+            </div>
+          );
+        }
+        if (step.kind === "pal") {
+          const p = PAL[step.pal];
+          return (
+            <div key={i} className="flex flex-col gap-1">
+              <span
+                className={cn("inline-flex w-fit items-center gap-1 rounded-full px-2 py-0.5 font-bold", indent, phone ? "text-[10px]" : "text-[11px]")}
+                style={{
+                  background: `color-mix(in srgb, ${p.color} 16%, white)`,
+                  color: `color-mix(in srgb, ${p.color} 72%, black)`,
+                }}
+              >
+                {p.name} joined
+              </span>
+              <div className="flex items-end gap-2">
+                <PalCircle pal={step.pal} className={phone ? "size-6" : "size-7"} />
+                <div className={cn("glass whitespace-pre-wrap rounded-3xl rounded-bl-md leading-snug text-ink shadow-soft", bubble)}>
+                  {step.text}
+                </div>
+              </div>
+            </div>
+          );
+        }
+        return (
+          <div key={i} className={indent}>
+            {step.render()}
+          </div>
+        );
+      })}
+    </>
+  );
+}
+
+/* ── chat chrome ──────────────────────────────────────────────────────── */
+function ChatHeader({ phone }: { phone?: boolean }) {
+  return (
+    <div className={cn("flex items-center justify-between", phone ? "px-4" : "border-b border-border px-5 py-3.5")}>
+      <div className="flex items-center gap-2.5">
+        <BrainMark className={phone ? "size-7" : "size-8"} />
+        <div>
+          <p className={cn("font-bold text-ink", phone ? "text-[13px]" : "text-sm")}>Family chat</p>
+          <p className={cn("flex items-center gap-1 text-ink-3", phone ? "text-[10px]" : "text-[11px]")}>
+            <span className="size-1.5 rounded-full bg-brand" /> PALs on call
+          </p>
+        </div>
+      </div>
+      <div className="flex -space-x-1.5">
+        {CAST.map((k) => (
+          <PalCircle key={k} pal={k} className={cn("ring-2 ring-card", phone ? "size-6" : "size-7")} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Composer({ phone }: { phone?: boolean }) {
+  return (
+    <div className={cn("flex items-center gap-2", phone ? "px-3" : "border-t border-border p-3")}>
+      <div className={cn("flex flex-1 items-center rounded-full bg-secondary text-ink-3", phone ? "px-3 py-2 text-[11px]" : "px-4 py-2.5 text-sm")}>
+        Message BrainPal…
+      </div>
+      <span className={cn("grid shrink-0 place-items-center rounded-full bg-secondary text-ink-2", phone ? "size-8" : "size-10")}>
+        <Mic className={phone ? "size-3.5" : "size-4"} strokeWidth={2.4} />
+      </span>
+      <span
+        className={cn("grid shrink-0 place-items-center rounded-full text-ink shadow-pop", phone ? "size-8" : "size-10")}
+        style={{ backgroundImage: "var(--grad-lime)" }}
+      >
+        <SendHorizontal className={phone ? "size-3.5" : "size-4"} strokeWidth={2.4} />
+      </span>
+    </div>
+  );
+}
+
+/* ── section ──────────────────────────────────────────────────────────── */
 export function Conversation() {
-  const listRef = useRef<HTMLDivElement>(null);
+  const root = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      const steps = gsap.utils.toArray<HTMLElement>("[data-step]");
-      if (steps.length === 0) return;
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: listRef.current, start: "top 72%", once: true },
-      });
-      steps.forEach((el, i) => {
-        const isCard = el.dataset.kind === "card";
-        tl.from(
-          el,
-          {
-            autoAlpha: 0,
-            y: 16,
-            scale: isCard ? 0.96 : 1,
-            duration: 0.5,
-            ease: "power2.out",
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 1024px)", () => {
+        const pin = root.current?.querySelector<HTMLElement>(".conv-pin");
+        const track = root.current?.querySelector<HTMLElement>(".chat-track");
+        const viewport = root.current?.querySelector<HTMLElement>(".chat-viewport");
+        if (!pin || !track || !viewport) return;
+
+        const distance = () => Math.max(0, track.scrollHeight - viewport.clientHeight);
+        if (distance() <= 0) return;
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: pin,
+            start: "top top",
+            end: () => "+=" + (distance() + window.innerHeight * 0.6),
+            pin: true,
+            scrub: 0.7,
+            invalidateOnRefresh: true,
           },
-          i === 0 ? 0 : "+=0.4"
-        );
+        });
+        tl.fromTo(track, { y: 0 }, { y: () => -distance(), ease: "none", duration: 1 }, 0);
+        tl.fromTo(".conv-progress", { scaleX: 0 }, { scaleX: 1, ease: "none", duration: 1 }, 0);
       });
+      return () => mm.revert();
     },
-    { scope: listRef }
+    { scope: root }
   );
 
   return (
-    <section className="relative overflow-hidden py-20 sm:py-28">
-      <div className="container-page">
-        <SectionHeading
-          kicker="See it in action"
-          title={
-            <>
-              One conversation.{" "}
-              <span className="text-gradient">Everything a kid needs.</span>
-            </>
-          }
-          description="Not a chatbot. Not a menu of apps. The PALs call in the right specialist the moment it's needed — and bring the tools with them."
-        />
+    <section id="conversation" ref={root} className="relative">
+      {/* ── Desktop: pinned iPhone with auto-scrolling chat replay ───────── */}
+      <div className="hidden lg:block">
+        <div className="conv-pin relative flex min-h-screen items-center overflow-hidden py-16">
+          <div className="absolute inset-0 -z-10 bg-mesh opacity-40" />
+          <div className="container-page grid grid-cols-[1fr_340px] items-center gap-14 xl:gap-20">
+            {/* copy */}
+            <div className="max-w-lg">
+              <Kicker>See it in action</Kicker>
+              <h2 className="mt-4 font-display text-4xl font-bold leading-[1.05] text-ink xl:text-5xl">
+                One conversation.{" "}
+                <span className="text-gradient">Everything a kid needs.</span>
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-ink-2">
+                Not a chatbot. Not a menu of apps. The PALs call in the right
+                specialist the moment it&apos;s needed — starting with money.
+              </p>
 
-        <div className="mx-auto mt-14 max-w-2xl">
-          <div className="overflow-hidden rounded-[2rem] bg-card shadow-soft-lg ring-1 ring-border">
-            {/* header */}
-            <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
-              <div className="flex items-center gap-2.5">
-                <BrainMark className="size-8" />
-                <div>
-                  <p className="text-sm font-bold text-ink">Family chat</p>
-                  <p className="flex items-center gap-1 text-[11px] text-ink-3">
-                    <span className="size-1.5 rounded-full bg-brand" />
-                    PALs on call
-                  </p>
-                </div>
-              </div>
-              <div className="flex -space-x-2">
-                {(["money", "parent", "study"] as PalId[]).map((k) => (
-                  <PalCircle key={k} pal={k} className="ring-2 ring-card" />
+              <div className="mt-8 flex flex-col gap-2.5">
+                {CAST.map((k) => (
+                  <div key={k} className="flex items-center gap-3 rounded-2xl bg-card px-3.5 py-2.5 shadow-soft ring-1 ring-border">
+                    <PalCircle pal={k} className="size-9" />
+                    <div>
+                      <p className="text-sm font-bold text-ink">{PAL[k].name}</p>
+                      <p className="text-xs text-ink-3">{PAL[k].role}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
-            </div>
 
-            {/* messages */}
-            <div ref={listRef} className="flex flex-col gap-3.5 bg-gradient-to-b from-lime-soft/40 to-transparent px-4 py-6 sm:px-6">
-              {STEPS.map((step, i) => {
-                if (step.kind === "user") {
-                  const isOliver = step.who === "Oliver";
-                  return (
-                    <div key={i} data-step data-kind="user" className="flex items-end justify-end gap-2.5">
-                      <div
-                        className={cn(
-                          "max-w-[80%] whitespace-pre-wrap rounded-3xl rounded-br-md px-4 py-2.5 text-sm font-medium leading-snug sm:text-[15px]",
-                          isOliver ? "text-ink" : "bg-ink text-white/95"
-                        )}
-                        style={isOliver ? { backgroundImage: "var(--grad-lime)" } : undefined}
-                      >
-                        {step.text}
-                      </div>
-                      <Face seed={step.who} className="size-9 shrink-0 shadow-soft ring-1 ring-border" alt={step.who} />
-                    </div>
-                  );
-                }
-                if (step.kind === "pal") {
-                  const p = PAL[step.pal];
-                  return (
-                    <div key={i} data-step data-kind="pal" className="flex flex-col gap-1.5">
-                      <span
-                        className="ml-9 inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold"
-                        style={{
-                          background: `color-mix(in srgb, ${p.color} 16%, white)`,
-                          color: `color-mix(in srgb, ${p.color} 72%, black)`,
-                        }}
-                      >
-                        {p.name} joined
-                      </span>
-                      <div className="flex items-end gap-2">
-                        <PalCircle pal={step.pal} />
-                        <div className="glass max-w-[80%] whitespace-pre-wrap rounded-3xl rounded-bl-md px-4 py-2.5 text-sm leading-snug text-ink shadow-soft sm:text-[15px]">
-                          {step.text}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-                return (
-                  <div key={i} data-step data-kind="card">
-                    {step.render()}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* composer */}
-            <div className="flex items-center gap-2 border-t border-border p-3">
-              <div className="flex flex-1 items-center rounded-full bg-secondary px-4 py-2.5 text-sm text-ink-3">
-                Message BrainPal…
+              <div className="mt-8 flex items-center gap-3">
+                <div className="h-1 w-44 overflow-hidden rounded-full bg-border">
+                  <div className="conv-progress h-full origin-left rounded-full" style={{ backgroundImage: "var(--grad-lime)", transform: "scaleX(0)" }} />
+                </div>
+                <span className="flex items-center gap-1 text-xs font-semibold text-ink-3">
+                  <ChevronsDown className="size-3.5 animate-bounce" /> Scroll to replay
+                </span>
               </div>
-              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-ink-2">
-                <Mic className="size-4" strokeWidth={2.4} />
-              </span>
-              <span className="grid size-10 shrink-0 place-items-center rounded-full text-ink shadow-pop" style={{ backgroundImage: "var(--grad-lime)" }}>
-                <SendHorizontal className="size-4" strokeWidth={2.4} />
-              </span>
             </div>
+
+            {/* phone */}
+            <div className="relative w-[300px] justify-self-center">
+              <div
+                aria-hidden
+                className="absolute inset-0 -z-10 m-auto size-[340px] rounded-full blur-3xl"
+                style={{ background: "radial-gradient(circle, color-mix(in srgb, var(--lime) 45%, transparent), transparent 70%)" }}
+              />
+              <DeviceFrame variant="silver">
+                <div className="flex h-full w-full flex-col gap-2 bg-gradient-to-b from-white to-lime-soft/40 pb-3 pt-[14%]">
+                  <ChatHeader phone />
+                  <div className="mx-4 h-px bg-border" />
+                  <div className="chat-viewport relative min-h-0 flex-1 overflow-hidden mask-fade-y">
+                    <div className="chat-track flex flex-col gap-2.5 px-3 will-change-transform">
+                      <div aria-hidden className="h-14 shrink-0" />
+                      <Messages variant="phone" />
+                      <div aria-hidden className="h-16 shrink-0" />
+                    </div>
+                  </div>
+                  <Composer phone />
+                </div>
+              </DeviceFrame>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Mobile: clean chat card ──────────────────────────────────────── */}
+      <div className="py-20 lg:hidden">
+        <div className="container-page">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <Kicker>See it in action</Kicker>
+            <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+              One conversation. <span className="text-gradient">Everything a kid needs.</span>
+            </h2>
+            <p className="max-w-md text-ink-2">
+              Not a chatbot. Not a menu of apps. The PALs call in the right specialist
+              the moment it&apos;s needed — starting with money.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-10 max-w-md overflow-hidden rounded-[2rem] bg-card shadow-soft-lg ring-1 ring-border">
+            <ChatHeader />
+            <div className="flex flex-col gap-3 bg-gradient-to-b from-lime-soft/40 to-transparent px-4 py-6">
+              <Messages variant="wide" />
+            </div>
+            <Composer />
           </div>
         </div>
       </div>
