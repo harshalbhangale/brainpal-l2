@@ -1,5 +1,8 @@
+"use client";
+
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { useInView } from "@/hooks/use-in-view";
 
 const testimonials = [
   {
@@ -29,14 +32,31 @@ const testimonials = [
 ];
 
 export function Testimonials() {
+  const { ref, inView } = useInView<HTMLElement>();
+
   return (
-    <section id="testimonials" className="py-20 sm:py-28">
+    <section id="testimonials" className="py-20 sm:py-28" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground opacity-0 animate-fadeIn [animation-fill-mode:forwards]">
+          <h2
+            className={cn(
+              "text-3xl sm:text-4xl font-bold text-foreground",
+              inView
+                ? "animate-fadeIn [animation-fill-mode:forwards]"
+                : "opacity-0"
+            )}
+          >
             Loved by Thinkers
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground opacity-0 animate-fadeIn [animation-fill-mode:forwards]" style={{ animationDelay: "150ms" }}>
+          <p
+            className={cn(
+              "mt-4 text-lg text-muted-foreground",
+              inView
+                ? "animate-fadeIn [animation-fill-mode:forwards]"
+                : "opacity-0"
+            )}
+            style={inView ? { animationDelay: "150ms" } : undefined}
+          >
             See what our community has to say.
           </p>
         </div>
@@ -46,9 +66,12 @@ export function Testimonials() {
             <div
               key={testimonial.name}
               className={cn(
-                "relative rounded-xl border bg-card p-8 opacity-0 animate-fadeIn [animation-fill-mode:forwards] transition-transform duration-300 hover:-translate-y-1"
+                "relative rounded-xl border bg-card p-8 transition-transform duration-300 hover:-translate-y-1",
+                inView
+                  ? "animate-fadeIn [animation-fill-mode:forwards]"
+                  : "opacity-0"
               )}
-              style={{ animationDelay: `${(i + 1) * 200}ms` }}
+              style={inView ? { animationDelay: `${(i + 1) * 200}ms` } : undefined}
             >
               {/* Decorative quote mark */}
               <span

@@ -18,7 +18,7 @@ export function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -60,6 +60,7 @@ export function Navbar() {
             className="md:hidden flex flex-col gap-1.5 p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle navigation menu"
+            aria-expanded={mobileOpen}
           >
             <span
               className={cn(
@@ -84,7 +85,11 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div className="md:hidden pb-4 animate-slideDown">
+          <div
+            className="md:hidden pb-4 animate-slideDown"
+            role="navigation"
+            aria-label="Mobile navigation"
+          >
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <a

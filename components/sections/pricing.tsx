@@ -1,5 +1,8 @@
+"use client";
+
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { useInView } from "@/hooks/use-in-view";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -75,16 +78,30 @@ const tiers: PricingTier[] = [
 ];
 
 export function Pricing() {
+  const { ref, inView } = useInView<HTMLElement>();
+
   return (
-    <section id="pricing" className="py-20 sm:py-28 bg-muted/30">
+    <section id="pricing" className="py-20 sm:py-28 bg-muted/30" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground opacity-0 animate-slideUp [animation-fill-mode:forwards]">
+          <h2
+            className={cn(
+              "text-3xl sm:text-4xl font-bold text-foreground",
+              inView
+                ? "animate-slideUp [animation-fill-mode:forwards]"
+                : "opacity-0"
+            )}
+          >
             Simple, Transparent Pricing
           </h2>
           <p
-            className="mt-4 text-lg text-muted-foreground opacity-0 animate-slideUp [animation-fill-mode:forwards]"
-            style={{ animationDelay: "100ms" }}
+            className={cn(
+              "mt-4 text-lg text-muted-foreground",
+              inView
+                ? "animate-slideUp [animation-fill-mode:forwards]"
+                : "opacity-0"
+            )}
+            style={inView ? { animationDelay: "100ms" } : undefined}
           >
             Choose the plan that fits your needs. Upgrade or downgrade anytime.
           </p>
@@ -95,10 +112,12 @@ export function Pricing() {
             <div
               key={tier.name}
               className={cn(
-                "opacity-0 animate-slideUp [animation-fill-mode:forwards]",
-                tier.highlighted && "md:scale-105"
+                tier.highlighted && "md:scale-105",
+                inView
+                  ? "animate-slideUp [animation-fill-mode:forwards]"
+                  : "opacity-0"
               )}
-              style={{ animationDelay: `${(i + 1) * 150}ms` }}
+              style={inView ? { animationDelay: `${(i + 1) * 150}ms` } : undefined}
             >
               {/* Gradient border wrapper for highlighted card */}
               <div

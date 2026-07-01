@@ -8,7 +8,7 @@ import { Footer } from "@/components/sections/footer";
 
 export default function Home() {
   return (
-    <main className="scroll-smooth">
+    <main>
       <Navbar />
       <Hero />
       <Features />

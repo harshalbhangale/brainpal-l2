@@ -1,5 +1,8 @@
+"use client";
+
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { useInView } from "@/hooks/use-in-view";
 import {
   Card,
   CardHeader,
@@ -48,14 +51,31 @@ const features = [
 ];
 
 export function Features() {
+  const { ref, inView } = useInView<HTMLElement>();
+
   return (
-    <section id="features" className="py-20 sm:py-28 bg-muted/30">
+    <section id="features" className="py-20 sm:py-28 bg-muted/30" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground opacity-0 animate-slideUp [animation-fill-mode:forwards]">
+          <h2
+            className={cn(
+              "text-3xl sm:text-4xl font-bold text-foreground",
+              inView
+                ? "animate-slideUp [animation-fill-mode:forwards]"
+                : "opacity-0"
+            )}
+          >
             Supercharge Your Mind
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto opacity-0 animate-slideUp [animation-fill-mode:forwards]" style={{ animationDelay: "100ms" }}>
+          <p
+            className={cn(
+              "mt-4 text-lg text-muted-foreground max-w-2xl mx-auto",
+              inView
+                ? "animate-slideUp [animation-fill-mode:forwards]"
+                : "opacity-0"
+            )}
+            style={inView ? { animationDelay: "100ms" } : undefined}
+          >
             Everything you need to capture, organize, and amplify your knowledge.
           </p>
         </div>
@@ -65,9 +85,12 @@ export function Features() {
             <Card
               key={feature.title}
               className={cn(
-                "opacity-0 animate-slideUp [animation-fill-mode:forwards] transition-transform duration-300 hover:scale-105"
+                "transition-transform duration-300 hover:scale-105",
+                inView
+                  ? "animate-slideUp [animation-fill-mode:forwards]"
+                  : "opacity-0"
               )}
-              style={{ animationDelay: `${(i + 1) * 100}ms` }}
+              style={inView ? { animationDelay: `${(i + 1) * 100}ms` } : undefined}
             >
               <CardHeader>
                 <div className="text-4xl mb-2" aria-hidden="true">
