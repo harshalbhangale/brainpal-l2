@@ -1,8 +1,9 @@
-import { BadgeCheck, Eye, Newspaper, Ban } from "lucide-react";
+import { BadgeCheck, Eye, Newspaper, Ban, Heart } from "lucide-react";
 import { Kicker } from "@/components/brand/section-heading";
 import { Reveal, RevealStagger, RevealItem } from "@/components/brand/reveal";
 import { Orb } from "@/components/brand/illustrations";
-import { FamilyScene } from "@/components/brand/scenes";
+import { DeviceFrame } from "@/components/brand/device-frame";
+import { CirclesScreen } from "./phone-screens";
 
 const TRUST = [
   { icon: BadgeCheck, label: "Verified circles only" },
@@ -21,55 +22,56 @@ export function BrainCircles() {
             <Kicker>Connection, not a feed</Kicker>
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className="text-balance text-4xl font-bold leading-[1.05] text-foreground sm:text-5xl">
+            <h2 className="text-balance text-4xl font-bold leading-[1.05] text-ink sm:text-5xl">
               The first social network parents{" "}
               <span className="text-gradient">actually want.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
+            <p className="max-w-xl text-lg leading-relaxed text-ink-2">
               BrainCircles is where kids connect around goals, chores and
               real-world wins — verified friends and family only. No strangers, no
               infinite scroll, no ads.{" "}
-              <span className="font-semibold text-foreground">Safe by default.</span>
+              <span className="font-semibold text-ink">Safe by default.</span>
             </p>
           </Reveal>
 
-          <RevealStagger className="mt-2 grid w-full gap-3 sm:grid-cols-2" amount={0.2}>
+          <RevealStagger className="mt-2 grid w-full gap-3 sm:grid-cols-2">
             {TRUST.map(({ icon: Icon, label }) => (
               <RevealItem key={label}>
                 <div className="flex items-center gap-3 rounded-2xl bg-card p-4 shadow-soft ring-1 ring-border">
-                  <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-soft text-brand">
+                  <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-parent-soft text-parent">
                     <Icon className="size-5" />
                   </span>
-                  <span className="text-sm font-semibold text-foreground">{label}</span>
+                  <span className="text-sm font-semibold text-ink">{label}</span>
                 </div>
               </RevealItem>
             ))}
           </RevealStagger>
         </div>
 
-        {/* illustration */}
+        {/* phone: BrainCircles feed */}
         <Reveal direction="left" delay={0.1}>
-          <div className="relative">
-            <Orb className="inset-0 m-auto size-[320px]" color="var(--brand)" opacity={0.16} />
-            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-soft/60 to-white p-8 shadow-soft ring-1 ring-border">
-              <div className="mb-4 flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-semibold text-brand-deep shadow-sm ring-1 ring-border">
-                  <span className="size-1.5 rounded-full bg-money" />
-                  Oliver&apos;s Circle
+          <div className="relative mx-auto flex w-full max-w-[320px] justify-center">
+            <Orb className="inset-0 m-auto size-[320px]" color="var(--parent)" opacity={0.2} />
+            <div className="relative w-[300px] animate-float-slow">
+              <DeviceFrame variant="orange">
+                <CirclesScreen />
+              </DeviceFrame>
+
+              {/* floating chips */}
+              <div className="absolute -left-10 top-16 flex items-center gap-2 rounded-2xl bg-white px-3 py-2 shadow-soft ring-1 ring-border sm:-left-14">
+                <span className="grid size-7 place-items-center rounded-full bg-parent-soft text-parent">
+                  <BadgeCheck className="size-4" />
                 </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-muted-foreground shadow-sm ring-1 ring-border">
-                  <BadgeCheck className="size-3.5 text-brand" />
-                  5 verified
+                <span className="text-xs font-bold text-ink">Parent-verified</span>
+              </div>
+              <div className="absolute -right-8 bottom-24 flex items-center gap-2 rounded-2xl bg-white px-3 py-2 shadow-soft ring-1 ring-border sm:-right-12">
+                <span className="grid size-7 place-items-center rounded-full bg-money-soft text-money-ink">
+                  <Heart className="size-4" fill="currentColor" />
                 </span>
+                <span className="text-xs font-bold text-ink">Real-world wins</span>
               </div>
-              <div className="flex justify-center">
-                <FamilyScene size={300} />
-              </div>
-              <p className="mt-4 text-center text-sm text-muted-foreground">
-                Everyone here is verified by a parent. No one else gets in.
-              </p>
             </div>
           </div>
         </Reveal>

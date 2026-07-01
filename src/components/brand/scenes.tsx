@@ -7,6 +7,7 @@
  */
 import { useEffect, useRef, type ReactNode } from "react";
 import { animate, stagger, createScope } from "animejs";
+import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const INK = "#0b0c0f";
@@ -246,6 +247,95 @@ export function BrainCoin({ size = 64, className, spin = true }: { size?: number
             <path d="M16 10.2v11" />
           </g>
         </svg>
+      </div>
+    </div>
+  );
+}
+
+
+/* ── Loop diagram: 3 nodes on a flowing ring, endlessly cycling. ──────────── */
+export function LoopDiagram({
+  nodes,
+  className,
+}: {
+  nodes: { label: string; Icon: LucideIcon; color: string; onDark?: boolean }[];
+  className?: string;
+}) {
+  const root = useScene(() => {
+    animate(".loop-orbit", { rotate: 360, duration: 9000, ease: "linear", loop: true });
+    animate(".loop-flow", { strokeDashoffset: [0, -36], duration: 1400, ease: "linear", loop: true });
+    animate(".loop-node", {
+      scale: [0.94, 1.04],
+      duration: 2400,
+      ease: "inOutSine",
+      loop: true,
+      alternate: true,
+      delay: stagger(320),
+    });
+    animate(".loop-center", { scale: [1, 1.06], duration: 3000, ease: "inOutSine", loop: true, alternate: true });
+  });
+
+  // 3 nodes at -90°, 30°, 150° on a radius of 40% of the box.
+  const R = 40;
+  const angles = [-90, 30, 150];
+  const pos = angles.map((a) => {
+    const rad = (a * Math.PI) / 180;
+    return { x: 50 + R * Math.cos(rad), y: 50 + R * Math.sin(rad) };
+  });
+
+  return (
+    <div ref={root} className={cn("relative mx-auto aspect-square w-full max-w-[380px]", className)}>
+      {/* flowing ring */}
+      <svg viewBox="0 0 320 320" className="absolute inset-0 size-full">
+        <circle cx="160" cy="160" r="120" fill="none" stroke="var(--border)" strokeWidth="2" />
+        <circle
+          className="loop-flow"
+          cx="160"
+          cy="160"
+          r="120"
+          fill="none"
+          stroke="var(--brand)"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeDasharray="4 16"
+        />
+      </svg>
+
+      {/* orbiting reward token */}
+      <div className="loop-orbit absolute inset-0">
+        <span
+          className="absolute left-1/2 grid size-9 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full text-ink shadow-pop"
+          style={{ top: "12.5%", backgroundImage: "var(--grad-gold)" }}
+        >
+          <BrainCoin size={22} spin={false} />
+        </span>
+      </div>
+
+      {/* nodes */}
+      {nodes.slice(0, 3).map((n, i) => (
+        <div
+          key={n.label}
+          className="loop-node absolute -translate-x-1/2 -translate-y-1/2"
+          style={{ left: `${pos[i].x}%`, top: `${pos[i].y}%` }}
+        >
+          <div className="flex flex-col items-center gap-2">
+            <span
+              className={cn("grid size-16 place-items-center rounded-2xl shadow-lg", n.onDark ? "text-white" : "text-ink")}
+              style={{ background: `linear-gradient(145deg, color-mix(in srgb, ${n.color} 82%, white), ${n.color})` }}
+            >
+              <n.Icon className="size-7" strokeWidth={2.2} />
+            </span>
+            <span className="rounded-full bg-card px-2.5 py-1 text-[11px] font-bold text-ink shadow-soft ring-1 ring-border">
+              {n.label}
+            </span>
+          </div>
+        </div>
+      ))}
+
+      {/* center */}
+      <div className="loop-center absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 rounded-full bg-ink px-5 py-4 text-center shadow-soft-lg">
+        <span className="font-display text-sm font-bold text-white">On repeat</span>
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-lime">every day</span>
       </div>
     </div>
   );

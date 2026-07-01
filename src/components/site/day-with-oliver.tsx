@@ -1,109 +1,115 @@
-import {
-  Sun,
-  Footprints,
-  ShoppingBag,
-  BookOpen,
-  UtensilsCrossed,
-  Moon,
-  MapPin,
-} from "lucide-react";
+"use client";
+
+import { useRef, useState } from "react";
+import { Sun, Footprints, ShoppingBag, BookOpen, UtensilsCrossed, Moon, MapPin } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { TIMELINE } from "@/lib/data";
 import { SectionHeading } from "@/components/brand/section-heading";
-import { Reveal, RevealStagger, RevealItem } from "@/components/brand/reveal";
 import { DeviceFrame } from "@/components/brand/device-frame";
-import { BrandLogo } from "@/components/brand/logo";
 import { Face } from "@/components/brand/face";
+import { DAY_SCREENS } from "./phone-screens";
 import { cn } from "@/lib/utils";
 
-const ICONS: Record<string, LucideIcon> = {
-  sun: Sun,
-  walk: Footprints,
-  cart: ShoppingBag,
-  book: BookOpen,
-  dinner: UtensilsCrossed,
-  moon: Moon,
-};
-
-type Moment = { color: string; onDark: boolean; tag: string };
-const META: Moment[] = [
-  { color: "var(--study)", onDark: true, tag: "StudyPal stays quiet" },
-  { color: "var(--study)", onDark: true, tag: "5-min warm-up" },
-  { color: "var(--money)", onDark: false, tag: "MoneyPal · rewards" },
-  { color: "var(--tutor)", onDark: false, tag: "TutorPal" },
-  { color: "var(--ink)", onDark: true, tag: "Phones down" },
-  { color: "var(--brand)", onDark: true, tag: "BrainPal signs off" },
+const ICONS: LucideIcon[] = [Sun, Footprints, ShoppingBag, BookOpen, UtensilsCrossed, Moon];
+const META = [
+  { color: "var(--study)", tag: "StudyPal stays quiet" },
+  { color: "var(--study)", tag: "5-min warm-up" },
+  { color: "var(--money)", tag: "MoneyPal · rewards" },
+  { color: "var(--tutor)", tag: "TutorPal" },
+  { color: "var(--ink)", tag: "Phones down" },
+  { color: "var(--brand)", tag: "BrainPal signs off" },
 ];
 
-/** Oliver's "Today" schedule — the app screen shown in the phone. */
-function DayScreen() {
-  const rows = [
-    { time: "07:30", label: "Your day, your pace", icon: Sun },
-    { time: "08:45", label: "Quiz warm-up · 5 min", icon: Footprints },
-    { time: "14:15", label: "Scan & save at the shops", icon: ShoppingBag },
-    { time: "18:00", label: "Tutor · flashcards", icon: BookOpen },
-    { time: "19:15", label: "Dinner · BrainPal off", icon: UtensilsCrossed },
-    { time: "20:00", label: "Goodnight", icon: Moon },
-  ];
-  return (
-    <div className="flex h-full w-full flex-col gap-3 bg-gradient-to-b from-white to-study-soft/40 px-4 pb-4 pt-[10%]">
-      <div className="flex items-center justify-between">
-        <BrandLogo size="sm" />
-        <Face seed="Oliver" className="size-8 ring-1 ring-black/5" alt="Oliver" />
-      </div>
-      <div>
-        <p className="text-[11px] font-medium text-ink-3">Thursday</p>
-        <p className="font-display text-lg font-bold text-ink">Oliver&apos;s day</p>
-      </div>
-      <div className="flex flex-1 flex-col gap-2">
-        {rows.map((r) => (
-          <div key={r.time} className="flex items-center gap-3 rounded-2xl bg-white p-2.5 shadow-soft ring-1 ring-border">
-            <span className="grid size-8 shrink-0 place-items-center rounded-xl bg-study-soft text-study">
-              <r.icon className="size-4" strokeWidth={2.4} />
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-[12px] font-bold text-ink">{r.label}</p>
-            </div>
-            <span className="font-mono text-[11px] font-semibold text-ink-3">{r.time}</span>
-          </div>
-        ))}
-      </div>
-      <div className="rounded-2xl bg-ink px-3 py-2.5 text-center">
-        <p className="text-[11px] font-semibold text-white/80">BrainPal is quiet until Oliver asks.</p>
-      </div>
-    </div>
-  );
-}
-
 export function DayWithOliver() {
+  const root = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  useGSAP(
+    () => {
+      const panels = gsap.utils.toArray<HTMLElement>("[data-moment]");
+      panels.forEach((panel, i) => {
+        ScrollTrigger.create({
+          trigger: panel,
+          start: "top center",
+          end: "bottom center",
+          onToggle: (self) => {
+            if (self.isActive) setActive(i);
+          },
+        });
+      });
+    },
+    { scope: root }
+  );
+
+  const ActiveIcon = ICONS[active];
+  const accent = META[active].color;
+
   return (
-    <section id="day" className="relative overflow-hidden py-20 sm:py-28">
+    <section id="day" ref={root} className="relative overflow-hidden py-20 sm:py-28">
       <div className="absolute inset-0 -z-10 bg-mesh opacity-40 mask-fade-y" />
       <div className="container-page">
         <SectionHeading
           kicker="Present when needed. Invisible when not."
           title="A day with Oliver."
-          description="BrainPal is the AI operating system for childhood — there in the moment, gone when it isn't needed."
+          description="BrainPal is the AI operating system for childhood — scroll through Oliver's day and watch it show up exactly when it's needed, then step back."
         />
 
-        <div className="mt-14 grid items-start gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
-          {/* Left: the device + Oliver */}
-          <Reveal direction="right" className="lg:sticky lg:top-28">
-            <div className="relative mx-auto flex max-w-[320px] flex-col items-center">
-              <div className="relative w-[300px] animate-float-slow">
+        <div className="mt-14 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          {/* Left: sticky phone that swaps screens as you scroll */}
+          <div className="lg:sticky lg:top-24 lg:flex lg:h-[82vh] lg:flex-col lg:justify-center">
+            <div className="mx-auto flex w-full max-w-[320px] flex-col items-center">
+              {/* time chip */}
+              <div className="mb-5 flex w-full items-center gap-3 rounded-full bg-card p-2 pr-4 shadow-soft ring-1 ring-border">
+                <span
+                  className="grid size-10 shrink-0 place-items-center rounded-full text-white transition-colors duration-500"
+                  style={{ background: `linear-gradient(145deg, color-mix(in srgb, ${accent} 82%, white), ${accent})` }}
+                >
+                  <ActiveIcon className="size-5" strokeWidth={2.4} />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="font-mono text-sm font-bold text-ink">{TIMELINE[active].time}</p>
+                  <p className="truncate text-[11px] font-semibold uppercase tracking-wide text-ink-3">
+                    {TIMELINE[active].tag}
+                  </p>
+                </div>
+                <div className="flex gap-1">
+                  {TIMELINE.map((_, i) => (
+                    <span
+                      key={i}
+                      className={cn("h-1.5 rounded-full transition-all duration-500", i === active ? "w-5 bg-brand" : "w-1.5 bg-border")}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* phone */}
+              <div className="relative w-full animate-float-slow">
                 <div
                   aria-hidden
-                  className="absolute inset-0 -z-10 m-auto size-[320px] rounded-full blur-3xl"
-                  style={{ background: "radial-gradient(circle, color-mix(in srgb, var(--study) 40%, transparent), transparent 70%)" }}
+                  className="absolute inset-0 -z-10 m-auto size-[320px] rounded-full blur-3xl transition-colors duration-700"
+                  style={{ background: `radial-gradient(circle, color-mix(in srgb, ${accent} 40%, transparent), transparent 70%)` }}
                 />
                 <DeviceFrame variant="silver">
-                  <DayScreen />
+                  <div className="relative h-full w-full">
+                    {DAY_SCREENS.map((Screen, i) => (
+                      <div
+                        key={i}
+                        className={cn(
+                          "absolute inset-0 transition-all duration-500 ease-out",
+                          active === i ? "opacity-100 blur-0" : "pointer-events-none opacity-0 blur-[2px]"
+                        )}
+                      >
+                        <Screen />
+                      </div>
+                    ))}
+                  </div>
                 </DeviceFrame>
               </div>
 
-              {/* Oliver identity chip */}
+              {/* Oliver identity */}
               <div className="mt-6 flex items-center gap-3 rounded-full bg-card px-3 py-2 shadow-soft ring-1 ring-border">
-                <Face seed="Oliver" className="size-10" alt="Oliver" />
+                <Face seed="Oliver" className="size-9" alt="Oliver" />
                 <div className="pr-2 text-left">
                   <p className="text-sm font-bold text-ink">Oliver, 11</p>
                   <p className="flex items-center gap-1 text-xs text-ink-3">
@@ -112,40 +118,39 @@ export function DayWithOliver() {
                 </div>
               </div>
             </div>
-          </Reveal>
+          </div>
 
-          {/* Right: the narrative timeline */}
-          <RevealStagger className="relative flex flex-col" amount={0.08}>
-            {/* rail */}
-            <div
-              aria-hidden
-              className="absolute left-6 top-2 bottom-2 w-0.5 -translate-x-1/2"
-              style={{ background: "linear-gradient(to bottom, transparent, var(--study) 8%, var(--brand) 92%, transparent)" }}
-            />
+          {/* Right: scrolling moments */}
+          <div className="flex flex-col">
             {TIMELINE.map((entry, i) => {
-              const Icon = ICONS[entry.icon];
+              const Icon = ICONS[i];
               const m = META[i];
+              const isActive = i === active;
               return (
-                <RevealItem key={entry.time} className="relative pb-6 pl-16 last:pb-0">
-                  {/* dot */}
-                  <span
+                <div
+                  key={entry.time}
+                  data-moment
+                  className="flex min-h-[62vh] items-center py-6 lg:min-h-[82vh]"
+                >
+                  <div
                     className={cn(
-                      "absolute left-6 top-1 grid size-11 -translate-x-1/2 place-items-center rounded-full shadow-lg ring-4 ring-background",
-                      m.onDark ? "text-white" : "text-ink"
+                      "w-full rounded-[2rem] bg-card p-7 shadow-soft ring-1 ring-border transition-all duration-500 sm:p-9",
+                      isActive ? "scale-100 opacity-100 shadow-soft-lg" : "scale-[0.97] opacity-55"
                     )}
-                    style={{ background: `linear-gradient(145deg, color-mix(in srgb, ${m.color} 80%, white), ${m.color})` }}
                   >
-                    <Icon className="size-5" strokeWidth={2.4} />
-                  </span>
-
-                  <div className="rounded-3xl bg-card p-5 shadow-soft ring-1 ring-border transition-all duration-300 hover:-translate-y-1 sm:p-6">
-                    <div className="flex flex-wrap items-center gap-2.5">
-                      <span className="font-mono text-lg font-bold text-ink">{entry.time}</span>
-                      <span className="rounded-full bg-secondary px-3 py-1 text-xs font-bold uppercase tracking-wide text-ink-2">
-                        {entry.tag}
-                      </span>
+                    <div className="flex items-center gap-3">
                       <span
-                        className="ml-auto rounded-full px-2.5 py-1 text-[11px] font-bold"
+                        className="grid size-12 place-items-center rounded-2xl text-white"
+                        style={{ background: `linear-gradient(145deg, color-mix(in srgb, ${m.color} 82%, white), ${m.color})` }}
+                      >
+                        <Icon className="size-6" strokeWidth={2.4} />
+                      </span>
+                      <div>
+                        <p className="font-display text-2xl font-bold text-ink">{entry.time}</p>
+                        <p className="text-xs font-bold uppercase tracking-wide text-ink-3">{entry.tag}</p>
+                      </div>
+                      <span
+                        className="ml-auto rounded-full px-3 py-1.5 text-[11px] font-bold"
                         style={{
                           background: `color-mix(in srgb, ${m.color} 15%, white)`,
                           color: `color-mix(in srgb, ${m.color} 70%, black)`,
@@ -154,12 +159,12 @@ export function DayWithOliver() {
                         {m.tag}
                       </span>
                     </div>
-                    <p className="mt-3 text-[15px] leading-relaxed text-ink-2">{entry.body}</p>
+                    <p className="mt-5 text-lg leading-relaxed text-ink-2">{entry.body}</p>
                   </div>
-                </RevealItem>
+                </div>
               );
             })}
-          </RevealStagger>
+          </div>
         </div>
       </div>
     </section>
