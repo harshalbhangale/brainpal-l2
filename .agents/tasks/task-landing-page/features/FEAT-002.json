@@ -1,0 +1,35 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Build all landing page sections with rich motion/animation design and assemble them into the main page. Includes: animated Navbar with scroll effect, Hero section with staggered text animations and floating 3D-style brain graphic, Features grid with scroll-triggered fade-in cards, Testimonials carousel-style section, Pricing cards with hover animations, CTA section with gradient background and email input, and Footer. All animations use CSS keyframes and Tailwind animate utilities defined in FEAT-001.",
+  "status": "pending",
+  "steps": [
+    "Create components/sections/navbar.tsx - Fixed navbar with backdrop blur, brand logo (BrainPal with brain emoji or SVG), navigation links (Features, Pricing, Testimonials), and CTA button. Include scroll-based opacity/shadow transition using CSS classes.",
+    "Create components/sections/hero.tsx - Full-viewport hero with: animated gradient background, large heading with word-by-word staggered fadeIn animation, subheading with slideUp animation (delayed), two CTA buttons (Get Started, Learn More) with scaleIn animation, and a floating abstract brain/neural network illustration using CSS gradients and animated dots/connections.",
+    "Create components/sections/features.tsx - Section with 6 feature cards in a responsive grid (1/2/3 columns). Each card uses the Card component with an icon (emoji or SVG), title, and description. Cards have staggered slideUp animations with increasing delays and hover:scale-105 transitions. Features: AI-Powered Learning, Smart Reminders, Knowledge Graph, Collaborative Spaces, Analytics Dashboard, Cross-Platform Sync.",
+    "Create components/sections/testimonials.tsx - Section with 3 testimonial cards showing user avatar (gradient circle with initials), quote, name, and role. Cards have subtle float animation and appear with fadeIn. Include decorative quote marks.",
+    "Create components/sections/pricing.tsx - Three pricing tier cards (Free, Pro, Enterprise) using Card component. Pro card is highlighted/scaled with a gradient border and 'Popular' badge. Cards have hover lift animation. Each card lists features with checkmark icons. CTA button on each card.",
+    "Create components/sections/cta.tsx - Full-width section with animated gradient mesh background, heading, subheading, email input with button (using Input and Button components), and floating particle dots using CSS animations.",
+    "Create components/sections/footer.tsx - Multi-column footer with brand, navigation links, social links, and copyright. Subtle fadeIn animation on scroll.",
+    "Create app/page.tsx - Assemble all sections in order: Navbar, Hero, Features, Testimonials, Pricing, CTA, Footer. Add smooth scroll behavior."
+  ],
+  "acceptance_criteria": [
+    "app/page.tsx imports and renders all section components in logical order",
+    "Hero section has staggered text animations using animation-delay CSS",
+    "Features section has 6 cards with staggered reveal animations",
+    "Pricing section has 3 tiers with the Pro tier visually highlighted",
+    "All sections use Tailwind responsive utilities for mobile/tablet/desktop",
+    "Navbar is fixed position with backdrop-blur effect",
+    "CTA section has an email input and submit button",
+    "Animations use the keyframes defined in globals.css and animation utilities from tailwind.config.ts",
+    "All components use TypeScript with proper typing",
+    "The design uses a cohesive color palette (blues/purples for an AI/brain theme)"
+  ],
+  "verification": [
+    "Run: find /projects/sandbox/brainpal-l2/components/sections -name '*.tsx' | sort to confirm all section files exist",
+    "Run: node -e \"const fs=require('fs'); const page=fs.readFileSync('/projects/sandbox/brainpal-l2/app/page.tsx','utf8'); console.log(page.includes('Hero') && page.includes('Features') && page.includes('Pricing') && page.includes('Navbar'))\" to verify page assembles all sections",
+    "Read the hero and features components to confirm animation classes are applied"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

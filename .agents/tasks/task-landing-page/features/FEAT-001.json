@@ -1,0 +1,38 @@
+{
+  "id": "FEAT-001",
+  "type": "feat",
+  "description": "Create the complete Next.js project scaffold with all configuration files, Tailwind CSS setup, utility libraries, and shadcn/ui-style base components. This establishes the foundation that all page sections depend on.",
+  "status": "in_progress",
+  "steps": [
+    "Create package.json with Next.js 14, React 18, Tailwind CSS 3, TypeScript, clsx, tailwind-merge, and class-variance-authority as dependencies (they won't be installed but define the project correctly)",
+    "Create tsconfig.json with Next.js-compatible settings including path aliases (@/ -> ./)",
+    "Create next.config.ts with standard Next.js configuration",
+    "Create tailwind.config.ts with custom theme extensions for colors (brand palette for BrainPal), animations (fadeIn, slideUp, slideDown, scaleIn, float, pulse-glow), and shadcn-compatible CSS variables",
+    "Create postcss.config.mjs with tailwindcss and autoprefixer plugins",
+    "Create app/globals.css with Tailwind directives (@tailwind base/components/utilities), CSS custom properties for light/dark themes (shadcn pattern), and @keyframes for all custom animations",
+    "Create lib/utils.ts with the cn() utility function (clsx + tailwind-merge pattern used by shadcn/ui)",
+    "Create lib/animations.ts with motion utility classes and animation delay helpers for staggered animations",
+    "Create components/ui/button.tsx - shadcn-style Button component using class-variance-authority pattern with variants (default, secondary, outline, ghost) and sizes (sm, default, lg)",
+    "Create components/ui/card.tsx - shadcn-style Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter components",
+    "Create components/ui/badge.tsx - shadcn-style Badge component with variants",
+    "Create components/ui/input.tsx - shadcn-style Input component for the email signup in CTA section",
+    "Create app/layout.tsx with Inter font from next/font/google, metadata for BrainPal, and globals.css import",
+    "Create a .gitignore file with standard Next.js ignores (node_modules, .next, out, etc.)"
+  ],
+  "acceptance_criteria": [
+    "All configuration files exist and have valid JSON/TypeScript syntax",
+    "tailwind.config.ts includes custom animation keyframes and brand colors",
+    "globals.css contains CSS custom properties for theming and @keyframes definitions",
+    "All ui components follow shadcn/ui patterns with forwardRef, className merging via cn(), and TypeScript types",
+    "lib/utils.ts exports cn() function",
+    "lib/animations.ts exports animation utility constants",
+    "app/layout.tsx properly wraps children with html/body tags and font configuration"
+  ],
+  "verification": [
+    "Run: find /projects/sandbox/brainpal-l2 -name '*.tsx' -o -name '*.ts' | head -20 to confirm file structure",
+    "Run: node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('/projects/sandbox/brainpal-l2/package.json','utf8')); console.log(Object.keys(pkg.dependencies))\" to verify dependencies are declared",
+    "Visually inspect that TypeScript files have no obvious syntax errors by reading key files"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

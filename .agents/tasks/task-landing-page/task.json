@@ -1,0 +1,7 @@
+{
+  "task_id": "task-landing-page",
+  "task_description": "Create a Next.js landing page for BrainPal with Tailwind CSS styling, shadcn/ui-style components, and rich motion/animation design. The project is built from scratch in an empty repository with no network access for package installation - all code is hand-written.",
+  "status": "in_progress",
+  "feature_order": ["FEAT-001", "FEAT-002"],
+  "blocked_reason": null
+}
