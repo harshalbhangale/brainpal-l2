@@ -6,6 +6,13 @@ import { Button } from "@/components/ui/button";
 
 const headingWords = ["Your", "AI-Powered", "Second", "Brain"];
 
+/**
+ * Hero section animations fire on mount (not scroll-gated) because this
+ * section is above-the-fold and immediately visible. Unlike Features,
+ * Testimonials, Pricing, and CTA which use useInView for scroll-triggered
+ * animation, the Hero intentionally uses mount-based animation for instant
+ * visual impact on page load.
+ */
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
