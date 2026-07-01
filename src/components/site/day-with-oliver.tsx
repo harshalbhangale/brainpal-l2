@@ -1,170 +1,225 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Sun, Footprints, ShoppingBag, BookOpen, UtensilsCrossed, Moon, MapPin } from "lucide-react";
+import { useRef } from "react";
+import { Sun, Footprints, ShoppingBag, BookOpen, UtensilsCrossed, Moon, MapPin, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { TIMELINE } from "@/lib/data";
-import { SectionHeading } from "@/components/brand/section-heading";
+import { Kicker } from "@/components/brand/section-heading";
+import { Reveal } from "@/components/brand/reveal";
 import { DeviceFrame } from "@/components/brand/device-frame";
 import { Face } from "@/components/brand/face";
-import { DAY_SCREENS } from "./phone-screens";
-import { cn } from "@/lib/utils";
+import { DAY_SCREENS, MorningScreen } from "./phone-screens";
 
-const ICONS: LucideIcon[] = [Sun, Footprints, ShoppingBag, BookOpen, UtensilsCrossed, Moon];
-const META = [
-  { color: "var(--study)", tag: "StudyPal stays quiet" },
-  { color: "var(--study)", tag: "5-min warm-up" },
-  { color: "var(--money)", tag: "MoneyPal · rewards" },
-  { color: "var(--tutor)", tag: "TutorPal" },
-  { color: "var(--ink)", tag: "Phones down" },
-  { color: "var(--brand)", tag: "BrainPal signs off" },
+type Moment = { time: string; tag: string; head: string; body: string; color: string; Icon: LucideIcon };
+
+const HEADS = [
+  "His day, his pace",
+  "A warm-up, on his terms",
+  "Scan, choose well, earn",
+  "Stuck? A tutor steps in",
+  "Phones down, family up",
+  "Signs off till morning",
 ];
+const COLORS = ["var(--study)", "var(--study)", "var(--money)", "var(--tutor)", "var(--ink)", "var(--brand)"];
+const ICONS: LucideIcon[] = [Sun, Footprints, ShoppingBag, BookOpen, UtensilsCrossed, Moon];
+
+const MOMENTS: Moment[] = TIMELINE.map((t, i) => ({
+  time: t.time,
+  tag: t.tag,
+  head: HEADS[i],
+  body: t.body,
+  color: COLORS[i],
+  Icon: ICONS[i],
+}));
+
+function MomentCard({ m }: { m: Moment }) {
+  const Icon = m.Icon;
+  return (
+    <div className="rounded-[2rem] bg-card p-7 shadow-soft-lg ring-1 ring-border sm:p-9">
+      <div className="flex items-center gap-3">
+        <span
+          className="grid size-12 place-items-center rounded-2xl text-white"
+          style={{ background: `linear-gradient(145deg, color-mix(in srgb, ${m.color} 82%, white), ${m.color})` }}
+        >
+          <Icon className="size-6" strokeWidth={2.4} />
+        </span>
+        <div>
+          <p className="font-display text-3xl font-extrabold leading-none text-ink">{m.time}</p>
+          <p className="mt-1 text-xs font-bold uppercase tracking-wide text-ink-3">{m.tag}</p>
+        </div>
+        <span
+          className="ml-auto rounded-full px-3 py-1.5 text-[11px] font-bold"
+          style={{
+            background: `color-mix(in srgb, ${m.color} 15%, white)`,
+            color: `color-mix(in srgb, ${m.color} 70%, black)`,
+          }}
+        >
+          BrainPal
+        </span>
+      </div>
+      <h3 className="mt-6 font-display text-2xl font-bold text-ink">{m.head}</h3>
+      <p className="mt-3 text-[15px] leading-relaxed text-ink-2">{m.body}</p>
+    </div>
+  );
+}
 
 export function DayWithOliver() {
   const root = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
 
   useGSAP(
     () => {
-      const panels = gsap.utils.toArray<HTMLElement>("[data-moment]");
-      panels.forEach((panel, i) => {
-        ScrollTrigger.create({
-          trigger: panel,
-          start: "top center",
-          end: "bottom center",
-          onToggle: (self) => {
-            if (self.isActive) setActive(i);
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 1024px)", () => {
+        const pin = root.current?.querySelector<HTMLElement>(".day-pin");
+        const screens = gsap.utils.toArray<HTMLElement>(".day-screen");
+        const cards = gsap.utils.toArray<HTMLElement>(".day-card");
+        const N = screens.length;
+        if (!pin || N === 0) return;
+
+        // initial: only the first moment visible
+        gsap.set(screens, { autoAlpha: 0, yPercent: 6 });
+        gsap.set(cards, { autoAlpha: 0, y: 40 });
+        gsap.set([screens[0], cards[0]], { autoAlpha: 1, yPercent: 0, y: 0 });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: pin,
+            start: "top top",
+            end: () => "+=" + window.innerHeight * (N - 0.35),
+            pin: true,
+            scrub: 0.6,
           },
         });
+
+        // rail progress runs across the whole timeline
+        tl.fromTo(".day-fill", { scaleY: 0 }, { scaleY: 1, ease: "none", duration: N - 1 }, 0);
+        tl.fromTo(".day-cursor", { top: "0%" }, { top: "100%", ease: "none", duration: N - 1 }, 0);
+
+        // step transitions
+        for (let i = 1; i < N; i++) {
+          const at = i - 0.5;
+          tl.to(screens[i - 1], { autoAlpha: 0, yPercent: -6, duration: 0.5, ease: "power2.in" }, at)
+            .to(cards[i - 1], { autoAlpha: 0, y: -40, duration: 0.5, ease: "power2.in" }, at)
+            .fromTo(screens[i], { autoAlpha: 0, yPercent: 6 }, { autoAlpha: 1, yPercent: 0, duration: 0.5, ease: "power2.out" }, at + 0.25)
+            .fromTo(cards[i], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" }, at + 0.25);
+        }
       });
+      return () => mm.revert();
     },
     { scope: root }
   );
 
-  const ActiveIcon = ICONS[active];
-  const accent = META[active].color;
-
   return (
-    <section id="day" ref={root} className="relative overflow-hidden py-20 sm:py-28">
-      <div className="absolute inset-0 -z-10 bg-mesh opacity-40 mask-fade-y" />
-      <div className="container-page">
-        <SectionHeading
-          kicker="Present when needed. Invisible when not."
-          title="A day with Oliver."
-          description="BrainPal is the AI operating system for childhood — scroll through Oliver's day and watch it show up exactly when it's needed, then step back."
-        />
+    <section id="day" ref={root} className="relative">
+      {/* ── Desktop: pinned scroll-story ─────────────────────────────── */}
+      <div className="hidden lg:block">
+        <div className="day-pin relative flex min-h-screen flex-col justify-center overflow-hidden py-14">
+          <div className="absolute inset-0 -z-10 bg-mesh opacity-40" />
+          <div className="container-page">
+            {/* compact header */}
+            <div className="mb-8 flex items-end justify-between gap-6">
+              <div>
+                <Kicker>Present when needed. Invisible when not.</Kicker>
+                <h2 className="mt-4 font-display text-4xl font-bold text-ink xl:text-5xl">
+                  A day with <span className="text-gradient">Oliver.</span>
+                </h2>
+              </div>
+              <p className="max-w-sm pb-1 text-right text-sm leading-relaxed text-ink-2">
+                The AI operating system for childhood — scroll his day and watch it
+                show up exactly when it&apos;s needed, then step back.
+              </p>
+            </div>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          {/* Left: sticky phone that swaps screens as you scroll */}
-          <div className="lg:sticky lg:top-24 lg:flex lg:h-[82vh] lg:flex-col lg:justify-center">
-            <div className="mx-auto flex w-full max-w-[320px] flex-col items-center">
-              {/* time chip */}
-              <div className="mb-5 flex w-full items-center gap-3 rounded-full bg-card p-2 pr-4 shadow-soft ring-1 ring-border">
-                <span
-                  className="grid size-10 shrink-0 place-items-center rounded-full text-white transition-colors duration-500"
-                  style={{ background: `linear-gradient(145deg, color-mix(in srgb, ${accent} 82%, white), ${accent})` }}
-                >
-                  <ActiveIcon className="size-5" strokeWidth={2.4} />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="font-mono text-sm font-bold text-ink">{TIMELINE[active].time}</p>
-                  <p className="truncate text-[11px] font-semibold uppercase tracking-wide text-ink-3">
-                    {TIMELINE[active].tag}
-                  </p>
+            <div className="flex items-center gap-8 xl:gap-14">
+              {/* rail */}
+              <div className="relative flex h-[440px] flex-col items-center justify-between py-1">
+                <Sun className="size-4 text-tutor" />
+                <div className="relative my-2 w-1.5 flex-1 rounded-full bg-border">
+                  <div
+                    className="day-fill absolute inset-x-0 top-0 h-full origin-top rounded-full"
+                    style={{ backgroundImage: "linear-gradient(to bottom, var(--study), var(--brand))", transform: "scaleY(0)" }}
+                  />
+                  <div className="day-cursor absolute -left-[7px] size-4 -translate-y-1/2 rounded-full bg-white shadow-pop ring-[3px] ring-brand" style={{ top: "0%" }} />
                 </div>
-                <div className="flex gap-1">
-                  {TIMELINE.map((_, i) => (
-                    <span
-                      key={i}
-                      className={cn("h-1.5 rounded-full transition-all duration-500", i === active ? "w-5 bg-brand" : "w-1.5 bg-border")}
-                    />
-                  ))}
-                </div>
+                <Moon className="size-4 text-study" />
               </div>
 
-              {/* phone */}
-              <div className="relative w-full animate-float-slow">
+              {/* phone (screens crossfade inside) */}
+              <div className="relative w-[280px] shrink-0">
                 <div
                   aria-hidden
-                  className="absolute inset-0 -z-10 m-auto size-[320px] rounded-full blur-3xl transition-colors duration-700"
-                  style={{ background: `radial-gradient(circle, color-mix(in srgb, ${accent} 40%, transparent), transparent 70%)` }}
+                  className="absolute inset-0 -z-10 m-auto size-[320px] rounded-full blur-3xl"
+                  style={{ background: "radial-gradient(circle, color-mix(in srgb, var(--brand) 34%, transparent), transparent 70%)" }}
                 />
                 <DeviceFrame variant="silver">
                   <div className="relative h-full w-full">
                     {DAY_SCREENS.map((Screen, i) => (
-                      <div
-                        key={i}
-                        className={cn(
-                          "absolute inset-0 transition-all duration-500 ease-out",
-                          active === i ? "opacity-100 blur-0" : "pointer-events-none opacity-0 blur-[2px]"
-                        )}
-                      >
+                      <div key={i} className="day-screen absolute inset-0" style={{ opacity: i === 0 ? 1 : 0 }}>
                         <Screen />
                       </div>
                     ))}
                   </div>
                 </DeviceFrame>
+
+                {/* Oliver chip */}
+                <div className="absolute -bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2.5 rounded-full bg-card px-3 py-2 shadow-soft-lg ring-1 ring-border">
+                  <Face seed="Oliver" className="size-8" alt="Oliver" />
+                  <div className="pr-1 text-left">
+                    <p className="text-[13px] font-bold leading-none text-ink">Oliver, 11</p>
+                    <p className="mt-0.5 flex items-center gap-1 text-[11px] text-ink-3">
+                      <MapPin className="size-2.5" /> Melbourne
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              {/* Oliver identity */}
-              <div className="mt-6 flex items-center gap-3 rounded-full bg-card px-3 py-2 shadow-soft ring-1 ring-border">
-                <Face seed="Oliver" className="size-9" alt="Oliver" />
-                <div className="pr-2 text-left">
-                  <p className="text-sm font-bold text-ink">Oliver, 11</p>
-                  <p className="flex items-center gap-1 text-xs text-ink-3">
-                    <MapPin className="size-3" /> Melbourne
-                  </p>
-                </div>
+              {/* cards (crossfade in place) */}
+              <div className="relative min-h-[360px] flex-1">
+                {MOMENTS.map((m, i) => (
+                  <div
+                    key={m.time}
+                    className="day-card absolute inset-x-0 top-1/2 -translate-y-1/2"
+                    style={{ opacity: i === 0 ? 1 : 0 }}
+                  >
+                    <MomentCard m={m} />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Right: scrolling moments */}
-          <div className="flex flex-col">
-            {TIMELINE.map((entry, i) => {
-              const Icon = ICONS[i];
-              const m = META[i];
-              const isActive = i === active;
-              return (
-                <div
-                  key={entry.time}
-                  data-moment
-                  className="flex min-h-[62vh] items-center py-6 lg:min-h-[82vh]"
-                >
-                  <div
-                    className={cn(
-                      "w-full rounded-[2rem] bg-card p-7 shadow-soft ring-1 ring-border transition-all duration-500 sm:p-9",
-                      isActive ? "scale-100 opacity-100 shadow-soft-lg" : "scale-[0.97] opacity-55"
-                    )}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span
-                        className="grid size-12 place-items-center rounded-2xl text-white"
-                        style={{ background: `linear-gradient(145deg, color-mix(in srgb, ${m.color} 82%, white), ${m.color})` }}
-                      >
-                        <Icon className="size-6" strokeWidth={2.4} />
-                      </span>
-                      <div>
-                        <p className="font-display text-2xl font-bold text-ink">{entry.time}</p>
-                        <p className="text-xs font-bold uppercase tracking-wide text-ink-3">{entry.tag}</p>
-                      </div>
-                      <span
-                        className="ml-auto rounded-full px-3 py-1.5 text-[11px] font-bold"
-                        style={{
-                          background: `color-mix(in srgb, ${m.color} 15%, white)`,
-                          color: `color-mix(in srgb, ${m.color} 70%, black)`,
-                        }}
-                      >
-                        {m.tag}
-                      </span>
-                    </div>
-                    <p className="mt-5 text-lg leading-relaxed text-ink-2">{entry.body}</p>
-                  </div>
-                </div>
-              );
-            })}
+      {/* ── Mobile: phone hero + animated timeline ───────────────────── */}
+      <div className="py-20 lg:hidden">
+        <div className="container-page">
+          <div className="flex flex-col items-center gap-5 text-center">
+            <Kicker>Present when needed. Invisible when not.</Kicker>
+            <h2 className="font-display text-4xl font-bold text-ink">
+              A day with <span className="text-gradient">Oliver.</span>
+            </h2>
           </div>
+
+          <div className="mx-auto mt-10 w-[260px]">
+            <DeviceFrame variant="silver">
+              <MorningScreen />
+            </DeviceFrame>
+          </div>
+
+          <div className="mt-12 flex flex-col gap-5">
+            {MOMENTS.map((m, i) => (
+              <Reveal key={m.time} delay={i * 0.02}>
+                <MomentCard m={m} />
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="mt-8 flex justify-center">
+            <span className="inline-flex items-center gap-2 rounded-full bg-brand-soft px-4 py-2 text-sm font-semibold text-brand-deep">
+              <Sparkles className="size-4" /> Present all day. Never in the way.
+            </span>
+          </Reveal>
         </div>
       </div>
     </section>
