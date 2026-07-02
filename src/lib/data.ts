@@ -27,10 +27,10 @@ export const PROBLEMS = [
   },
   {
     no: "03",
-    title: "Childhood is fragmented.",
-    body: "Dozens of disconnected, addictive, data-hungry apps compete for attention.",
-    stat: { from: "84%", to: null, label: "of 8–12s are already on social" },
-    icon: "fragmented",
+    title: "Now they're locked out.",
+    body: "Australia's under-16 ban cleared kids off social media overnight — and the 84% who lived there have nowhere safe to go.",
+    stat: { from: "84%", to: null, label: "of 8–12s were on social" },
+    icon: "banned",
   },
   {
     no: "04",
@@ -61,7 +61,7 @@ export const PALS: {
     key: "tutor",
     name: "TutorPal",
     role: "Subject tutor",
-    quote: "Algebra, again — your way.",
+    quote: "Here is your personalised History tutorial.",
     colorVar: "var(--tutor)",
     soft: "var(--tutor-soft)",
   },
@@ -75,7 +75,7 @@ export const PALS: {
   },
 ];
 
-export const UPCOMING_PALS = ["CareerPal", "HealthPal", "CoachPal", "FashionPal"];
+export const UPCOMING_PALS = ["CareerPal", "HealthPal", "InfluencerPal", "NotePal"];
 
 export const TIMELINE = [
   {
@@ -99,7 +99,7 @@ export const TIMELINE = [
   {
     time: "18:00",
     tag: "Tutor",
-    body: "Stuck on a subject, he asks for help. TutorPal runs a few flashcards, then quizzes him back — voice-first, never in the way.",
+    body: "Stuck on a subject, he asks for help. TutorPal runs a few flashcards, then quizzes him back — voice-first, never in the way, and rewards the effort.",
     icon: "book",
   },
   {

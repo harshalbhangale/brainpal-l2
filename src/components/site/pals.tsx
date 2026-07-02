@@ -13,8 +13,12 @@ export function Pals() {
       <div className="container-page">
         <SectionHeading
           kicker="A new era of money"
-          title="Who said a bank can't have a brain?"
-          description="A new AI era — and a new kind of money. A bank that also teaches, tutors and guides healthier choices. Same account, a whole lot smarter."
+          title={
+            <>
+              Meet your PALs — <span className="text-gradient">specialists when you need them.</span>
+            </>
+          }
+          description="AI companions for every purpose. A new AI era — and a new kind of money. PALs teach, tutor and guide healthier choices."
         />
 
         {/* one brain, many faces */}
@@ -24,7 +28,7 @@ export function Pals() {
             <p className="text-base leading-relaxed text-muted-foreground">
               <span className="font-bold text-foreground">One brain, many faces.</span>{" "}
               Every PAL has its own voice, personality and memory — it feels less
-              like an app, more like texting a friend.
+              like an app, more like talking to a friend.
             </p>
           </div>
         </Reveal>

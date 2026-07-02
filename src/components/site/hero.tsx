@@ -55,12 +55,16 @@ export function Hero() {
         {/* Left: copy */}
         <div className="flex flex-col items-start gap-6">
           <div className="hero-eyebrow">
-            <Kicker>Introducing BrainPal</Kicker>
+            <Kicker>A bank with a brain, for young people</Kicker>
           </div>
 
           <h1 className="hero-title max-w-2xl text-balance text-4xl font-extrabold leading-[1.02] tracking-tight text-ink sm:text-6xl md:text-[4.1rem]">
-            A Bank With A <span className="text-gradient">Brain</span> For Young People
+            A bank with a <span className="text-gradient">brain</span>, for young people
           </h1>
+
+          <p className="hero-sub max-w-xl text-lg font-semibold leading-snug text-ink sm:text-xl">
+            Every child has a crew of PALs — AI companions to help them grow.
+          </p>
 
           <p className="hero-sub max-w-xl text-lg leading-relaxed text-ink-2 sm:text-xl">
             BrainPal is the first AI bank for young people — where money, learning

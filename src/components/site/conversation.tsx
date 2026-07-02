@@ -125,7 +125,7 @@ const STEPS: Step[] = [
   { kind: "pal", pal: "parent", text: "Done. $15 bonus if you help organise the garage this weekend." },
   { kind: "card", render: () => <ChoreCard /> },
   { kind: "user", who: "Oliver", text: "Also — help me revise science." },
-  { kind: "pal", pal: "tutor", text: "Based on your previous tests, photosynthesis is on tomorrow's quiz. Want flashcards to practise?" },
+  { kind: "pal", pal: "tutor", text: "Based on your previous tests, photosynthesis is on tomorrow's quiz. Want flashcards to practise? I'll interview you live tomorrow at 4pm." },
   { kind: "card", render: () => <FlashcardCard /> },
 ];
 

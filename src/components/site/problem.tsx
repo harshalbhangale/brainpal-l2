@@ -1,4 +1,4 @@
-import { Nfc, Coins, Milestone, HelpCircle, LayoutGrid, ArrowRight } from "lucide-react";
+import { Nfc, Coins, Milestone, HelpCircle, Ban, ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/brand/section-heading";
 import { Reveal } from "@/components/brand/reveal";
 import { DeclineBars, Gauge } from "@/components/brand/data-viz";
@@ -52,23 +52,23 @@ export function Problem() {
             </article>
           </Reveal>
 
-          {/* 03 — fragmented (84% gauge + scattered apps) */}
+          {/* 03 — the social ban (84% gauge + apps going dark) */}
           <Reveal delay={0.08}>
             <article className="relative flex h-full flex-col overflow-hidden rounded-3xl bg-card p-6 shadow-soft-lg ring-1 ring-border">
               <div className="flex items-center gap-3">
                 <span className="grid size-10 place-items-center rounded-xl bg-parent-soft text-parent">
-                  <LayoutGrid className="size-5" />
+                  <Ban className="size-5" />
                 </span>
                 <span className="font-mono text-sm font-bold text-ink-3">03</span>
               </div>
-              <h3 className="mt-4 font-display text-xl font-bold tracking-tight text-ink">Childhood is fragmented.</h3>
+              <h3 className="mt-4 font-display text-xl font-bold tracking-tight text-ink">Now they&apos;re locked out.</h3>
               <p className="mt-2 text-sm leading-relaxed text-ink-2">
-                Dozens of disconnected, addictive, data-hungry apps compete for attention.
+                Australia&apos;s under-16 ban cleared kids off social media overnight — and the 84% who lived there have nowhere safe to go.
               </p>
               <div className="mt-5 grid flex-1 grid-cols-[auto_1fr] items-center gap-6 rounded-2xl bg-muted/40 p-4 ring-1 ring-border">
                 <Gauge value={84} color="var(--parent)" />
                 <div>
-                  {/* scattered app tiles */}
+                  {/* scattered app tiles — the platforms now off-limits */}
                   <div className="relative h-24 w-full">
                     {APP_TILES.map((t, i) => (
                       <span
@@ -78,7 +78,7 @@ export function Problem() {
                       />
                     ))}
                   </div>
-                  <p className="mt-2 text-xs font-semibold text-ink-3">of 8–12s are already on social</p>
+                  <p className="mt-2 text-xs font-semibold text-ink-3">of 8–12s were on social</p>
                 </div>
               </div>
             </article>

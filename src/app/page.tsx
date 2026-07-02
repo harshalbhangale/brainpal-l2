@@ -2,10 +2,10 @@ import { Nav } from "@/components/site/nav";
 import { Hero } from "@/components/site/hero";
 import { Problem } from "@/components/site/problem";
 import { Pals } from "@/components/site/pals";
-import { TutorPal } from "@/components/site/tutorpal";
 import { DayWithOliver } from "@/components/site/day-with-oliver";
 import { Money } from "@/components/site/money";
 import { Conversation } from "@/components/site/conversation";
+import { TutorPal } from "@/components/site/tutorpal";
 import { HowItWorks } from "@/components/site/how-it-works";
 import { BrainCircles } from "@/components/site/brain-circles";
 import { AuthoritySafety } from "@/components/site/authority-safety";
@@ -22,11 +22,11 @@ export default function Home() {
         <Hero />
         <Problem />
         <Pals />
-        <Money />
-        <TutorPal />
-        <Conversation />
-        <HowItWorks />
         <DayWithOliver />
+        <Money />
+        <Conversation />
+        <TutorPal />
+        <HowItWorks />
         <BrainCircles />
         <AuthoritySafety />
         <Testimonials />

@@ -14,12 +14,12 @@ import { DAY_SCREENS, MorningScreen } from "./phone-screens";
 type Moment = { time: string; tag: string; head: string; body: string; color: string; Icon: LucideIcon };
 
 const HEADS = [
-  "His day, his pace",
-  "A warm-up, on his terms",
-  "Scan, choose well, earn",
-  "Stuck? A tutor steps in",
+  "BrainPal greets Oliver",
+  "TutorPal prepares him for class",
+  "MoneyPal helps him decide",
+  "An AI teacher conducts a science interview",
   "Phones down, family up",
-  "Signs off till morning",
+  "Parents receive a reassuring update",
 ];
 const COLORS = ["var(--study)", "var(--study)", "var(--money)", "var(--tutor)", "var(--ink)", "var(--brand)"];
 const ICONS: LucideIcon[] = [Sun, Footprints, ShoppingBag, BookOpen, UtensilsCrossed, Moon];

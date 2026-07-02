@@ -1,7 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, ShieldCheck, MailX, MapPin, ArrowUpRight, ArrowRight } from "lucide-react";
 import { NAV_LINKS, PALS } from "@/lib/data";
-import { BrandWordmark } from "@/components/brand/logo";
 import { PalAvatar } from "@/components/brand/pal-avatar";
 
 const MORE_LINKS = [
@@ -29,7 +29,13 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr] lg:gap-16">
           {/* brand */}
           <div className="flex flex-col gap-6">
-            <BrandWordmark tone="dark" className="text-4xl" />
+            <Image
+              src="/brainpal_logo.svg"
+              alt="BrainPal"
+              width={190}
+              height={54}
+              className="h-11 w-auto"
+            />
             <p className="max-w-xs text-[15px] leading-relaxed text-white/55">
               The AI bank young people grow up with — money, learning and safety in
               one trusted family of companions.

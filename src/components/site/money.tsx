@@ -36,12 +36,19 @@ export function Money() {
       <div className="container-page">
         <div className="flex flex-col items-center gap-5 text-center">
           <Reveal>
-            <Kicker tone="light">Money — the spine</Kicker>
+            <Kicker tone="light">Money</Kicker>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="max-w-3xl text-balance text-4xl font-bold leading-[1.05] sm:text-5xl md:text-[3.4rem]">
               Learn money by <span className="text-gradient">living it.</span>
             </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="max-w-2xl text-lg leading-relaxed text-white/70">
+              Allowance flows in. Goals fill up. Chores convert into spending power.
+              Every tap is a quiet lesson in agency — on a real, parent-controlled
+              account.
+            </p>
           </Reveal>
         </div>
 

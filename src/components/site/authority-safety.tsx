@@ -15,7 +15,7 @@ export function AuthoritySafety() {
     <section id="trust" className="relative overflow-hidden bg-cream py-20 sm:py-28">
       <div className="container-page">
         <SectionHeading
-          kicker="Built for parents. Built on safety & privacy."
+          kicker="Built for parents. Built on safety and privacy."
           title="Authority without hovering."
           description="Approve a purchase from the kitchen. Spot a worry before it grows. Know your child is safe — without watching their screen."
         />

@@ -108,7 +108,7 @@ export function HeroCardStack({ className }: { className?: string }) {
                 {/* top: BrainPal wordmark + balance */}
                 <span className="absolute inset-x-0 top-0 flex items-start justify-between p-3">
                   <span className="flex flex-col gap-0.5">
-                    <Image src="/logo-white.png" alt="" width={84} height={24} className="h-[16px] w-auto drop-shadow" />
+                    <Image src="/brainpal_logo.svg" alt="" width={84} height={24} className="h-[16px] w-auto drop-shadow" />
                     <span className="text-[7px] font-semibold uppercase tracking-[0.18em] text-white/75 drop-shadow">
                       {card.name} Edition
                     </span>
