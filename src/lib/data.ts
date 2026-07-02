@@ -1,4 +1,4 @@
-export type PalKey = "money" | "study" | "tutor" | "parent";
+export type PalKey = "money" | "tutor" | "parent";
 
 export const NAV_LINKS = [
   { label: "Problem", href: "/#problem" },
@@ -58,14 +58,6 @@ export const PALS: {
     soft: "var(--money-soft)",
   },
   {
-    key: "study",
-    name: "StudyPal",
-    role: "Study companion",
-    quote: "Ready for a five-minute interview?",
-    colorVar: "var(--study)",
-    soft: "var(--study-soft)",
-  },
-  {
     key: "tutor",
     name: "TutorPal",
     role: "Subject tutor",
@@ -89,7 +81,7 @@ export const TIMELINE = [
   {
     time: "07:30",
     tag: "Morning",
-    body: "Oliver starts his own day — his schedule's there if he wants it, but StudyPal stays quiet until he asks.",
+    body: "Oliver starts his own day — his schedule's there if he wants it, but TutorPal stays quiet until he asks.",
     icon: "sun",
   },
   {
@@ -159,8 +151,8 @@ export const CHAT_SCRIPT: ChatMessage[] = [
   },
   { from: "oliver", author: "Oliver", text: "Also — help me revise science." },
   {
-    from: "study",
-    author: "StudyPal",
+    from: "tutor",
+    author: "TutorPal",
     joined: true,
     text: "Based on your previous tests, photosynthesis is on tomorrow's quiz. Want flashcards to practise? I'll interview you live tomorrow at 4pm.",
   },
@@ -232,7 +224,7 @@ export const FAQS = [
 ];
 
 export const THESIS = [
-  "We are not building another youth bank.",
+  "We are not building just another youth bank.",
   "We are not building just another tutoring app.",
-  "We are not building another social network.",
+  "We are not building just another social network.",
 ];

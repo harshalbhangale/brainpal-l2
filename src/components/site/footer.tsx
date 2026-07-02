@@ -96,7 +96,7 @@ export function Footer() {
         <div className="mt-14 flex flex-col items-center justify-between gap-6 rounded-[2rem] bg-white/5 p-8 ring-1 ring-white/10 sm:flex-row sm:p-10">
           <div>
             <p className="font-display text-2xl font-bold text-white sm:text-3xl">
-              Give your child a companion that grows up with them.
+              Give your child a companion that grows with them.
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/55">
               {TRUST.map(({ icon: Icon, label }) => (

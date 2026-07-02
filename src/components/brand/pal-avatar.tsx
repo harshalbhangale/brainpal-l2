@@ -1,4 +1,4 @@
-import { Wallet, GraduationCap, Pencil, Users } from "lucide-react";
+import { Wallet, GraduationCap, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { PalKey } from "@/lib/data";
@@ -8,8 +8,7 @@ const PAL_META: Record<
   { icon: LucideIcon; color: string; name: string; onDark: boolean }
 > = {
   money: { icon: Wallet, color: "var(--money)", name: "MoneyPal", onDark: false },
-  study: { icon: GraduationCap, color: "var(--study)", name: "StudyPal", onDark: true },
-  tutor: { icon: Pencil, color: "var(--tutor)", name: "TutorPal", onDark: false },
+  tutor: { icon: GraduationCap, color: "var(--tutor)", name: "TutorPal", onDark: true },
   parent: { icon: Users, color: "var(--parent)", name: "ParentPal", onDark: false },
 };
 

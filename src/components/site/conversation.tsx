@@ -25,13 +25,13 @@ import { Kicker } from "@/components/brand/section-heading";
 import { cn } from "@/lib/utils";
 
 /* ── PALs ─────────────────────────────────────────────────────────────── */
-type PalId = "money" | "parent" | "study";
+type PalId = "money" | "parent" | "tutor";
 const PAL: Record<PalId, { name: string; role: string; color: string; icon: LucideIcon }> = {
   money: { name: "MoneyPal", role: "Financial coach", color: "var(--money)", icon: Wallet },
   parent: { name: "ParentPal", role: "Family coordinator", color: "var(--parent)", icon: Users },
-  study: { name: "StudyPal", role: "Study companion", color: "var(--study)", icon: GraduationCap },
+  tutor: { name: "TutorPal", role: "Subject tutor", color: "var(--tutor)", icon: GraduationCap },
 };
-const CAST: PalId[] = ["money", "parent", "study"];
+const CAST: PalId[] = ["money", "parent", "tutor"];
 
 function PalCircle({ pal, className }: { pal: PalId; className?: string }) {
   const p = PAL[pal];
@@ -92,7 +92,7 @@ function FlashcardCard() {
   return (
     <div className="rounded-2xl bg-white p-3 shadow-soft ring-1 ring-border">
       <div className="flex items-center gap-2">
-        <span className="grid size-8 place-items-center rounded-lg bg-study-soft text-study"><BookOpen className="size-4" /></span>
+        <span className="grid size-8 place-items-center rounded-lg bg-tutor-soft text-tutor"><BookOpen className="size-4" /></span>
         <div className="min-w-0 flex-1">
           <p className="truncate text-[12px] font-bold text-ink">Photosynthesis</p>
           <p className="text-[10px] text-ink-3">On tomorrow&apos;s quiz</p>
@@ -101,10 +101,10 @@ function FlashcardCard() {
       <div className="mt-2 flex flex-wrap gap-1.5">
         <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-semibold text-ink-2">5 flashcards</span>
         <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-0.5 text-[10px] font-semibold text-ink-2">
-          <CalendarClock className="size-3 text-study" /> Live · 4pm
+          <CalendarClock className="size-3 text-tutor" /> Live · 4pm
         </span>
       </div>
-      <span className="mt-2 flex w-full items-center justify-center rounded-full py-1.5 text-[11px] font-bold text-white" style={{ background: "var(--study)" }}>
+      <span className="mt-2 flex w-full items-center justify-center rounded-full py-1.5 text-[11px] font-bold text-white" style={{ background: "var(--tutor)" }}>
         Practise now
       </span>
     </div>
@@ -125,7 +125,7 @@ const STEPS: Step[] = [
   { kind: "pal", pal: "parent", text: "Done. $15 bonus if you help organise the garage this weekend." },
   { kind: "card", render: () => <ChoreCard /> },
   { kind: "user", who: "Oliver", text: "Also — help me revise science." },
-  { kind: "pal", pal: "study", text: "Based on your previous tests, photosynthesis is on tomorrow's quiz. Want flashcards to practise?" },
+  { kind: "pal", pal: "tutor", text: "Based on your previous tests, photosynthesis is on tomorrow's quiz. Want flashcards to practise?" },
   { kind: "card", render: () => <FlashcardCard /> },
 ];
 

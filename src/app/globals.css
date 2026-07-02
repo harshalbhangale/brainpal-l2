@@ -146,8 +146,8 @@
   --money-ink: #55670a;
   --study: #8b7cff;
   --study-soft: #ece9ff;
-  --tutor: #ff9f45;
-  --tutor-soft: #ffe9d3;
+  --tutor: #8b7cff;
+  --tutor-soft: #ece9ff;
   --parent: #38bdf8;
   --parent-soft: #dcf2ff;
 
@@ -314,4 +314,11 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+
+/* Live "listening" equalizer bars (TutorPal voice interview) */
+@keyframes soundbar {
+  0%, 100% { transform: scaleY(0.32); }
+  50% { transform: scaleY(1); }
 }

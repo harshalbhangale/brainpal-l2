@@ -2,6 +2,7 @@ import { Nav } from "@/components/site/nav";
 import { Hero } from "@/components/site/hero";
 import { Problem } from "@/components/site/problem";
 import { Pals } from "@/components/site/pals";
+import { TutorPal } from "@/components/site/tutorpal";
 import { DayWithOliver } from "@/components/site/day-with-oliver";
 import { Money } from "@/components/site/money";
 import { Conversation } from "@/components/site/conversation";
@@ -21,10 +22,11 @@ export default function Home() {
         <Hero />
         <Problem />
         <Pals />
-        <DayWithOliver />
+        <TutorPal />
         <Money />
         <Conversation />
         <HowItWorks />
+        <DayWithOliver />
         <BrainCircles />
         <AuthoritySafety />
         <Testimonials />

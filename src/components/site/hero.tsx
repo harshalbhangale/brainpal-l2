@@ -61,7 +61,7 @@ export function Hero() {
 
           <h1 className="hero-title max-w-2xl text-balance text-4xl font-extrabold leading-[1.02] tracking-tight text-ink sm:text-6xl md:text-[4.1rem]">
             Every child deserves an AI companion that{" "}
-            <span className="text-gradient">grows up with them.</span>
+            <span className="text-gradient">grows with them.</span>
           </h1>
 
           <p className="hero-sub max-w-xl text-lg leading-relaxed text-ink-2 sm:text-xl">
@@ -107,7 +107,7 @@ export function Hero() {
                 so they never cover the screen. gsap scales the wrapper, CSS floats the inner. */}
             <div className="hero-float absolute right-full top-16 mr-2 hidden sm:block">
               <div className="animate-float" style={{ animationDelay: "0.4s" }}>
-                <PalAvatar palKey="study" size="md" className="rotate-[-8deg]" />
+                <PalAvatar palKey="money" size="md" className="rotate-[-8deg]" />
               </div>
             </div>
             <div className="hero-float absolute right-full bottom-24 mr-2 hidden sm:block">

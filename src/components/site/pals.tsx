@@ -13,7 +13,7 @@ export function Pals() {
       <div className="container-page">
         <SectionHeading
           kicker="A new era of money"
-          title="Who said a bank has to be boring?"
+          title="Who said a bank can't have a brain?"
           description="A new AI era — and a new kind of money. A bank that also teaches, tutors and guides healthier choices. Same account, a whole lot smarter."
         />
 

@@ -35,11 +35,19 @@ export function ThesisCta() {
           <RevealStagger className="mt-8 flex flex-col gap-3" amount={0.3}>
             {THESIS.map((line) => (
               <RevealItem key={line}>
-                <p className="flex items-center justify-center gap-3 text-lg font-medium text-white/45 sm:text-xl">
+                <p className="flex items-center justify-center gap-3 text-lg font-medium text-white/55 sm:text-xl">
                   <span className="grid size-6 shrink-0 place-items-center rounded-full bg-white/10 text-white/50">
                     <X className="size-3.5" />
                   </span>
-                  <span className="line-through decoration-white/25">{line}</span>
+                  <span>
+                    {line.split(/(\bjust\b)/i).map((part, i) =>
+                      /^just$/i.test(part) ? (
+                        <strong key={i} className="font-bold text-white">{part}</strong>
+                      ) : (
+                        <span key={i}>{part}</span>
+                      )
+                    )}
+                  </span>
                 </p>
               </RevealItem>
             ))}

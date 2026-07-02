@@ -89,18 +89,18 @@ export function MorningScreen() {
         ))}
       </div>
       <div className="mt-auto rounded-2xl bg-ink px-3 py-3 text-center">
-        <p className="text-[11px] font-semibold text-white/80">StudyPal is quiet until you ask.</p>
+        <p className="text-[11px] font-semibold text-white/80">TutorPal is quiet until you ask.</p>
       </div>
     </ScreenShell>
   );
 }
 
-/* 08:45 — StudyPal warm-up chat */
+/* 08:45 — TutorPal warm-up chat */
 export function WalkScreen() {
   return (
     <ScreenShell time="08:45" tint="linear-gradient(180deg,#ffffff,#ece9ff)">
       <div className="flex flex-1 flex-col justify-center gap-3">
-        <PalTag label="StudyPal" color="var(--study)" />
+        <PalTag label="TutorPal" color="var(--tutor)" />
         <div className="flex items-end gap-2">
           <span className="grid size-7 shrink-0 place-items-center rounded-full text-white" style={{ background: "var(--study)" }}>
             <GraduationCap className="size-3.5" strokeWidth={2.5} />
@@ -162,7 +162,7 @@ export function ScanScreen() {
 /* 18:00 — TutorPal flashcard + live interview */
 export function TutorScreen() {
   return (
-    <ScreenShell time="18:00" tint="linear-gradient(180deg,#ffffff,#ffe9d3)">
+    <ScreenShell time="18:00" tint="linear-gradient(180deg,#ffffff,#ece9ff)">
       <PalTag label="TutorPal" color="var(--tutor)" />
       <div className="rounded-[1.3rem] bg-white p-4 shadow-soft ring-1 ring-border">
         <div className="flex items-center justify-between text-[11px] font-semibold text-ink-3">
