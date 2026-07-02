@@ -7,7 +7,7 @@ import { GetEarlyAccess, SecondaryCta } from "@/components/brand/cta";
 import { Kicker } from "@/components/brand/section-heading";
 import { PalAvatar } from "@/components/brand/pal-avatar";
 import { Orb } from "@/components/brand/illustrations";
-import { BrainCoin } from "@/components/brand/scenes";
+import { BrainCard } from "@/components/brand/brain-card";
 import { Face } from "@/components/brand/face";
 import { WaitlistCount } from "@/components/brand/waitlist-count";
 import { PhoneMockup } from "./phone-mockup";
@@ -103,6 +103,18 @@ export function Hero() {
               <PhoneMockup />
             </div>
 
+            {/* Captain BrainPal card — floating in front of the phone */}
+            <div className="hero-float absolute -bottom-10 left-2 z-20 w-[250px] sm:left-4">
+              <div
+                aria-hidden
+                className="absolute inset-3 -z-10 rounded-2xl blur-2xl"
+                style={{ background: "linear-gradient(135deg,#2563eb,#b91c1c)", opacity: 0.5 }}
+              />
+              <div className="rotate-[-9deg]">
+                <BrainCard />
+              </div>
+            </div>
+
             {/* floating PALs — anchored beside the phone (left-full / right-full),
                 so they never cover the screen. gsap scales the wrapper, CSS floats the inner. */}
             <div className="hero-float absolute right-full top-16 mr-2 hidden sm:block">
@@ -127,11 +139,6 @@ export function Hero() {
                 <ShieldCheck className="size-4" />
               </span>
               <span className="text-xs font-bold text-ink">Parent-approved</span>
-            </div>
-
-            <div className="hero-float absolute bottom-10 left-full ml-2 hidden items-center gap-2 whitespace-nowrap rounded-2xl bg-white px-3 py-2 shadow-soft ring-1 ring-border lg:flex">
-              <BrainCoin size={26} />
-              <span className="text-xs font-bold text-ink">+50 Brains</span>
             </div>
           </div>
         </div>
