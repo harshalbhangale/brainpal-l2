@@ -22,8 +22,8 @@ export default function Home() {
         <Hero />
         <Problem />
         <Pals />
-        <TutorPal />
         <Money />
+        <TutorPal />
         <Conversation />
         <HowItWorks />
         <DayWithOliver />

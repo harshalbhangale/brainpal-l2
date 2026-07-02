@@ -7,7 +7,6 @@ import { GetEarlyAccess, SecondaryCta } from "@/components/brand/cta";
 import { Kicker } from "@/components/brand/section-heading";
 import { PalAvatar } from "@/components/brand/pal-avatar";
 import { Orb } from "@/components/brand/illustrations";
-import { BrainCard } from "@/components/brand/brain-card";
 import { Face } from "@/components/brand/face";
 import { WaitlistCount } from "@/components/brand/waitlist-count";
 import { PhoneMockup } from "./phone-mockup";
@@ -56,12 +55,11 @@ export function Hero() {
         {/* Left: copy */}
         <div className="flex flex-col items-start gap-6">
           <div className="hero-eyebrow">
-            <Kicker>A bank with a brain, for young people</Kicker>
+            <Kicker>Introducing BrainPal</Kicker>
           </div>
 
           <h1 className="hero-title max-w-2xl text-balance text-4xl font-extrabold leading-[1.02] tracking-tight text-ink sm:text-6xl md:text-[4.1rem]">
-            The first AI bank that{" "}
-            <span className="text-gradient">saves, teaches and protects.</span>
+            A Bank With A <span className="text-gradient">Brain</span> For Young People
           </h1>
 
           <p className="hero-sub max-w-xl text-lg leading-relaxed text-ink-2 sm:text-xl">
@@ -101,18 +99,6 @@ export function Hero() {
           <div className="hero-phone relative">
             <div className="animate-float-slow">
               <PhoneMockup />
-            </div>
-
-            {/* Captain BrainPal card — floating in front of the phone */}
-            <div className="hero-float absolute -bottom-10 left-2 z-20 w-[250px] sm:left-4">
-              <div
-                aria-hidden
-                className="absolute inset-3 -z-10 rounded-2xl blur-2xl"
-                style={{ background: "linear-gradient(135deg,#2563eb,#b91c1c)", opacity: 0.5 }}
-              />
-              <div className="rotate-[-9deg]">
-                <BrainCard />
-              </div>
             </div>
 
             {/* floating PALs — anchored beside the phone (left-full / right-full),

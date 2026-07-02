@@ -2,7 +2,8 @@ import { BrandLogo } from "@/components/brand/logo";
 import { BrainCoin } from "@/components/brand/scenes";
 import { Face } from "@/components/brand/face";
 import { DeviceFrame } from "@/components/brand/device-frame";
-import { Home, MessageCircle, GraduationCap, Gift, Wallet, TrendingUp, Blocks } from "lucide-react";
+import { HeroCardStack } from "@/components/brand/hero-card-stack";
+import { Home, MessageCircle, GraduationCap, Gift, Wallet, Blocks } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /** Oliver's home screen — the content rendered inside the iPhone frame. */
@@ -20,22 +21,8 @@ export function PhoneScreen() {
         <p className="font-display text-lg font-bold text-ink">Oliver</p>
       </div>
 
-      {/* savings card */}
-      <div className="relative overflow-hidden rounded-[1.3rem] p-4 text-white" style={{ backgroundImage: "var(--grad-ink)" }}>
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/50">Your savings</span>
-          <TrendingUp className="size-4 text-lime" />
-        </div>
-        <p className="mt-1 font-display text-[1.7rem] font-extrabold tracking-tight tabular-nums" style={{ color: "var(--lime)" }}>
-          $30.00
-        </p>
-        <div className="mt-2 flex items-end gap-1">
-          {[8, 12, 9, 16, 13, 20, 24].map((h, i) => (
-            <span key={i} className="w-1.5 rounded-full" style={{ height: h, background: i === 6 ? "var(--lime)" : "rgba(255,255,255,0.28)" }} />
-          ))}
-          <span className="ml-auto text-[10px] font-bold text-lime">+$5 this week</span>
-        </div>
-      </div>
+      {/* hero card — real BrainPal card artwork, auto-cycling deck */}
+      <HeroCardStack className="mt-1" />
 
       {/* goal card */}
       <div className="rounded-[1.1rem] bg-white p-3 shadow-soft ring-1 ring-border">

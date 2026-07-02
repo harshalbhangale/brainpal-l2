@@ -29,19 +29,19 @@ export function Problem() {
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
           {/* 01 — cash went invisible (dark, animated bars) */}
           <Reveal>
-            <article className="relative flex h-full flex-col overflow-hidden rounded-[2rem] bg-ink p-8 text-white shadow-soft-lg">
+            <article className="relative flex h-full flex-col overflow-hidden rounded-3xl bg-ink p-6 text-white shadow-soft-lg">
               <div className="absolute inset-0 -z-0 bg-dots opacity-[0.12]" />
               <div className="relative flex items-center gap-3">
-                <span className="grid size-12 place-items-center rounded-2xl bg-white/10 text-lime">
-                  <Nfc className="size-6" />
+                <span className="grid size-10 place-items-center rounded-xl bg-white/10 text-lime">
+                  <Nfc className="size-5" />
                 </span>
                 <span className="font-mono text-sm font-bold text-white/40">01</span>
               </div>
-              <h3 className="relative mt-5 font-display text-2xl font-bold">Money went invisible.</h3>
-              <p className="relative mt-2 text-[15px] leading-relaxed text-white/60">
+              <h3 className="relative mt-4 font-display text-xl font-bold tracking-tight">Money went invisible.</h3>
+              <p className="relative mt-2 text-sm leading-relaxed text-white/60">
                 Kids don&apos;t touch cash — they tap, so the piggy-bank lessons no longer land.
               </p>
-              <div className="relative mt-6 rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+              <div className="relative mt-5 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
                 <DeclineBars />
                 <div className="mt-4 flex items-center justify-center gap-2 text-xs font-semibold text-white/50">
                   <span>Cash as a share of payments</span>
@@ -54,18 +54,18 @@ export function Problem() {
 
           {/* 03 — fragmented (84% gauge + scattered apps) */}
           <Reveal delay={0.08}>
-            <article className="relative flex h-full flex-col overflow-hidden rounded-[2rem] bg-card p-8 shadow-soft-lg ring-1 ring-border">
+            <article className="relative flex h-full flex-col overflow-hidden rounded-3xl bg-card p-6 shadow-soft-lg ring-1 ring-border">
               <div className="flex items-center gap-3">
-                <span className="grid size-12 place-items-center rounded-2xl bg-parent-soft text-parent">
-                  <LayoutGrid className="size-6" />
+                <span className="grid size-10 place-items-center rounded-xl bg-parent-soft text-parent">
+                  <LayoutGrid className="size-5" />
                 </span>
                 <span className="font-mono text-sm font-bold text-ink-3">03</span>
               </div>
-              <h3 className="mt-5 font-display text-2xl font-bold text-ink">Childhood is fragmented.</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-ink-2">
+              <h3 className="mt-4 font-display text-xl font-bold tracking-tight text-ink">Childhood is fragmented.</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-2">
                 Dozens of disconnected, addictive, data-hungry apps compete for attention.
               </p>
-              <div className="mt-6 grid flex-1 grid-cols-[auto_1fr] items-center gap-6 rounded-2xl bg-muted/40 p-5 ring-1 ring-border">
+              <div className="mt-5 grid flex-1 grid-cols-[auto_1fr] items-center gap-6 rounded-2xl bg-muted/40 p-4 ring-1 ring-border">
                 <Gauge value={84} color="var(--parent)" />
                 <div>
                   {/* scattered app tiles */}
@@ -108,16 +108,16 @@ export function Problem() {
             },
           ].map((p) => (
             <Reveal key={p.no} delay={0.05}>
-              <article className="group relative flex h-full items-start gap-5 overflow-hidden rounded-[2rem] bg-card p-7 shadow-soft ring-1 ring-border transition-all duration-300 hover:-translate-y-1">
-                <span className="pointer-events-none absolute -right-2 -top-4 select-none font-display text-[6rem] font-extrabold leading-none text-ink/[0.04]">
+              <article className="group relative flex h-full items-start gap-4 overflow-hidden rounded-3xl bg-card p-6 shadow-soft ring-1 ring-border transition-all duration-300 hover:-translate-y-1">
+                <span className="pointer-events-none absolute -right-2 -top-4 select-none font-display text-[5rem] font-extrabold leading-none text-ink/[0.04]">
                   {p.no}
                 </span>
-                <span className={cn("grid size-14 shrink-0 place-items-center rounded-2xl", p.tint, p.text)}>
-                  <p.icon className="size-7" />
+                <span className={cn("grid size-12 shrink-0 place-items-center rounded-xl", p.tint, p.text)}>
+                  <p.icon className="size-6" />
                 </span>
                 <div className="relative">
-                  <h3 className="text-xl font-bold text-ink">{p.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{p.body}</p>
+                  <h3 className="text-lg font-bold tracking-tight text-ink">{p.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-ink-2">{p.body}</p>
                 </div>
               </article>
             </Reveal>

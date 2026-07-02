@@ -40,7 +40,7 @@ export function Pals() {
           </span>
         </div>
 
-        <RevealStagger className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" amount={0.1}>
+        <RevealStagger className="mx-auto mt-8 grid max-w-4xl gap-5 sm:grid-cols-3" amount={0.1}>
           {PALS.map((pal) => (
             <RevealItem key={pal.key}>
               <article

@@ -29,7 +29,7 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr] lg:gap-16">
           {/* brand */}
           <div className="flex flex-col gap-6">
-            <BrandLogo tone="dark" size="lg" />
+            <BrandLogo tone="light" size="lg" />
             <p className="max-w-xs text-[15px] leading-relaxed text-white/55">
               The AI bank young people grow up with — money, learning and safety in
               one trusted family of companions.
