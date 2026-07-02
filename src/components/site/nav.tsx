@@ -45,7 +45,7 @@ export function Nav() {
           )}
         >
           <Link href="/#top" className="flex items-center" aria-label="BrainPal home">
-            <BrandLogo />
+            <BrandLogo size="xl" priority />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">

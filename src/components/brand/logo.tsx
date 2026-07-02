@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 // The real logo art is ~1549 x 457 (ratio ≈ 3.39).
 const RATIO = 3.39;
-const HEIGHTS = { xs: 18, sm: 22, md: 27, lg: 34 } as const;
+const HEIGHTS = { xs: 18, sm: 22, md: 27, lg: 34, xl: 46 } as const;
 
 /** The actual BrainPal logo — colour on light, white on dark. */
 export function BrandLogo({
@@ -29,6 +29,41 @@ export function BrandLogo({
       priority={priority}
       className={cn("w-auto select-none", className)}
     />
+  );
+}
+
+/**
+ * Text wordmark — renders "Brainpal" with the "ai" accented in the brand green,
+ * exactly like the logo's AI highlight. On dark surfaces the rest of the word is
+ * white (so it stays legible on the black footer) instead of the black raster art.
+ * Uses the self-hosted Clash Display face, so it stays crisp at any size.
+ */
+export function BrandWordmark({
+  className,
+  tone = "dark",
+}: {
+  className?: string;
+  tone?: "light" | "dark";
+}) {
+  return (
+    <span
+      className={cn(
+        "inline-flex select-none items-baseline font-display font-bold leading-none tracking-tight",
+        tone === "dark" ? "text-white" : "text-ink",
+        className
+      )}
+      aria-label="Brainpal"
+    >
+      <span>Br</span>
+      <span
+        aria-hidden
+        className="bg-clip-text text-transparent"
+        style={{ backgroundImage: "var(--grad-green)" }}
+      >
+        ai
+      </span>
+      <span>npal</span>
+    </span>
   );
 }
 
