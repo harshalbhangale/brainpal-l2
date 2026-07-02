@@ -28,13 +28,14 @@ export function Footer() {
         {/* top band */}
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr] lg:gap-16">
           {/* brand */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col items-start gap-6">
             <Image
-              src="/brainpal_logo.svg"
+              src="/logo-white.png"
               alt="BrainPal"
-              width={190}
-              height={54}
-              className="h-11 w-auto"
+              width={1549}
+              height={457}
+              className="h-10 w-auto self-start object-left"
+              priority={false}
             />
             <p className="max-w-xs text-[15px] leading-relaxed text-white/55">
               The AI bank young people grow up with — money, learning and safety in
