@@ -60,8 +60,8 @@ export function Hero() {
           </div>
 
           <h1 className="hero-title max-w-2xl text-balance text-4xl font-extrabold leading-[1.02] tracking-tight text-ink sm:text-6xl md:text-[4.1rem]">
-            Every child deserves an AI companion that{" "}
-            <span className="text-gradient">grows with them.</span>
+            The first AI bank that{" "}
+            <span className="text-gradient">saves, teaches and protects.</span>
           </h1>
 
           <p className="hero-sub max-w-xl text-lg leading-relaxed text-ink-2 sm:text-xl">
