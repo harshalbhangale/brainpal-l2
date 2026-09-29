@@ -126,7 +126,10 @@ export function Footer() {
         {/* bottom bar */}
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 text-sm text-white/45 sm:flex-row">
           <p>© {new Date().getFullYear()} BrainPal Pty Ltd. All rights reserved.</p>
-          <p className="text-white/40">Money, learning &amp; safety — in one brain.</p>
+          <div className="flex items-center gap-5">
+            <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
+            <Link href="/termsandconditions" className="transition-colors hover:text-white">Terms &amp; Conditions</Link>
+          </div>
         </div>
       </div>
 
