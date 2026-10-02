@@ -4,7 +4,7 @@ import { Reveal, RevealStagger, RevealItem } from "@/components/brand/reveal";
 import { Orb } from "@/components/brand/illustrations";
 import { BrainMark } from "@/components/brand/logo";
 import { WaitlistForm } from "./waitlist-form";
-import { WaitlistCount } from "@/components/brand/waitlist-count";
+import { WaitlistCount, WaitlistProof } from "@/components/brand/waitlist-count";
 
 const FOOTER_TRUST = [
   { icon: MailX, label: "No spam, ever" },
@@ -85,10 +85,10 @@ export function ThesisCta() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <p className="mt-4 text-sm text-white/60">
+            <WaitlistProof className="mt-4 text-sm text-white/60">
               <WaitlistCount className="font-bold text-white" /> Australian
               families already joined
-            </p>
+            </WaitlistProof>
           </Reveal>
 
           <Reveal delay={0.25}>

@@ -8,7 +8,7 @@ import { Kicker } from "@/components/brand/section-heading";
 import { PalAvatar } from "@/components/brand/pal-avatar";
 import { Orb } from "@/components/brand/illustrations";
 import { Face } from "@/components/brand/face";
-import { WaitlistCount } from "@/components/brand/waitlist-count";
+import { WaitlistCount, WaitlistProof } from "@/components/brand/waitlist-count";
 import { PhoneMockup } from "./phone-mockup";
 
 const FAMILY_NAMES = ["Emma", "Daniel", "Sarah", "Priya", "James"];
@@ -23,7 +23,6 @@ export function Hero() {
         .from(".hero-title", { y: 28, opacity: 0, duration: 0.85 }, "-=0.3")
         .from(".hero-sub", { y: 20, opacity: 0, duration: 0.6 }, "-=0.55")
         .from(".hero-cta", { y: 18, opacity: 0, duration: 0.55 }, "-=0.4")
-        .from(".hero-proof", { y: 16, opacity: 0, duration: 0.55 }, "-=0.4")
         .from(".hero-phone", { y: 44, opacity: 0, scale: 0.94, duration: 0.9, ease: "power4.out" }, "-=1")
         .from(".hero-float", { scale: 0, opacity: 0, duration: 0.6, stagger: 0.12, ease: "back.out(1.7)" }, "-=0.45");
 
@@ -79,7 +78,7 @@ export function Hero() {
             </SecondaryCta>
           </div>
 
-          <div className="hero-proof flex items-center gap-3 pt-2">
+          <WaitlistProof className="flex items-center gap-3 pt-2">
             <div className="flex -space-x-2.5">
               {FAMILY_NAMES.map((n) => (
                 <Face key={n} seed={n} className="size-9 shadow-soft ring-2 ring-background" alt="" />
@@ -89,7 +88,7 @@ export function Hero() {
               <WaitlistCount className="font-bold text-ink" /> Australian families
               on the early-access list
             </p>
-          </div>
+          </WaitlistProof>
         </div>
 
         {/* Right: phone + floating elements */}

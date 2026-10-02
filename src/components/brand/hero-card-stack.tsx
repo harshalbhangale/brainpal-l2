@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * A single BrainPal hero card design. The artwork (`src`) is a full-bleed
- * Visa face lifted straight from the app's card skins — we only overlay the
+ * original BrainPal card design — we only overlay the
  * BrainPal wordmark, balance, chip and last-4 on top with a legibility scrim.
  */
 type HeroCard = {
@@ -19,9 +19,9 @@ type HeroCard = {
 };
 
 const HERO_CARDS: HeroCard[] = [
-  { id: "cap", name: "Striker", src: "/cards/cap.jpg", glow: "linear-gradient(135deg,#2563eb,#b91c1c)" },
-  { id: "iron", name: "Forge", src: "/cards/iron.jpg", glow: "linear-gradient(135deg,#dc2626,#f59e0b)" },
-  { id: "hulk", name: "Titan", src: "/cards/hulk.jpg", glow: "linear-gradient(135deg,#4d7c0f,#6b21a8)" },
+  { id: "lime", name: "Lime", src: "/cards/lime.svg", glow: "linear-gradient(135deg,#c5f441,#19c37d)" },
+  { id: "aurora", name: "Aurora", src: "/cards/aurora.svg", glow: "linear-gradient(135deg,#8b7cff,#38bdf8)" },
+  { id: "midnight", name: "Midnight", src: "/cards/midnight.svg", glow: "linear-gradient(135deg,#34e89e,#0f9d58)" },
 ];
 
 const BALANCE = "$30.00";
@@ -95,6 +95,7 @@ export function HeroCardStack({ className }: { className?: string }) {
                   src={card.src}
                   alt={`BrainPal ${card.name} card`}
                   fill
+                  unoptimized
                   sizes="(max-width: 640px) 60vw, 260px"
                   className="object-cover"
                   priority={i === 0}

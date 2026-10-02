@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1012 638" width="1012" height="638">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#04140d"/><stop offset="1" stop-color="#0f9d58"/></linearGradient>
+    <filter id="b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="70"/></filter>
+    <radialGradient id="sh" cx="0.2" cy="0" r="1"><stop offset="0" stop-color="#fff" stop-opacity="0.35"/><stop offset="0.6" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1012" height="638" fill="url(#bg)"/>
+  <circle cx="800" cy="130" r="230" fill="#34e89e" opacity="0.75" filter="url(#b)"/>
+  <circle cx="180" cy="560" r="260" fill="#0b0c0f" opacity="0.7" filter="url(#b)"/>
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.22" stroke-width="2">
+    <circle cx="760" cy="330" r="150"/><circle cx="760" cy="330" r="230"/><circle cx="760" cy="330" r="310"/><circle cx="760" cy="330" r="390"/>
+  </g>
+  <rect width="1012" height="638" fill="url(#sh)"/>
+</svg>

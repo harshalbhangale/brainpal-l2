@@ -11,17 +11,15 @@ function getSql() {
   return neon(url);
 }
 
-const BASE = Number(process.env.NEXT_PUBLIC_WAITLIST_BASE ?? 2400);
-
-/** Displayed "families joined" number = base + real signups. */
+/** Real number of waitlist signups. */
 export async function getWaitlistCount(): Promise<number> {
   try {
     const rows = (await getSql()`SELECT count(*)::int AS count FROM waitlist`) as {
       count: number;
     }[];
-    return BASE + Number(rows[0]?.count ?? 0);
+    return Number(rows[0]?.count ?? 0);
   } catch {
-    return BASE;
+    return 0;
   }
 }
 

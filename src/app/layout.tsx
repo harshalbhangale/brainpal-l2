@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "BrainPal — The AI bank young people grow up with",
     description:
-      "Money, learning and safety in one trusted family of AI companions. Join 2,400+ Australian families on the early-access list.",
+      "Money, learning and safety in one trusted family of AI companions.",
     url: siteUrl,
     siteName: "BrainPal",
     locale: "en_AU",

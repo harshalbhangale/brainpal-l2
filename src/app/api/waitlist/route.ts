@@ -4,7 +4,7 @@ export const runtime = "nodejs";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-/** Returns the current "families joined" count (base + real signups). */
+/** Returns the current "families joined" count (real signups). */
 export async function GET() {
   const count = await getWaitlistCount();
   return Response.json({ count });
