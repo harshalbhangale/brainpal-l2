@@ -5,6 +5,7 @@ import { NAV_LINKS, PALS } from "@/lib/data";
 import { PalAvatar } from "@/components/brand/pal-avatar";
 
 const MORE_LINKS = [
+  { label: "Sign in", href: "https://app.brainpal.com.au" },
   { label: "For Schools", href: "/schools" },
   { label: "Rewards economy", href: "/rewards" },
   { label: "Get Early Access", href: "/#get-started" },

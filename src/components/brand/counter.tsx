@@ -38,6 +38,7 @@ export function Counter({
   useGSAP(
     () => {
       const obj = { v: from };
+      if (ref.current) ref.current.textContent = `${prefix}${render(from)}${suffix}`;
       gsap.to(obj, {
         v: to,
         duration,
@@ -53,7 +54,7 @@ export function Counter({
 
   return (
     <span ref={ref} className={cn("tabular-nums", className)}>
-      {`${prefix}${render(from)}${suffix}`}
+      {`${prefix}${render(to)}${suffix}`}
     </span>
   );
 }

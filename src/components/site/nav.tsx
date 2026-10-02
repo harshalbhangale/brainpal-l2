@@ -61,6 +61,12 @@ export function Nav() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <a
+              href="https://app.brainpal.com.au"
+              className="hidden rounded-full px-3.5 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-brand-soft hover:text-brand-deep sm:inline-flex"
+            >
+              Sign in
+            </a>
             <GetEarlyAccess className="hidden h-10 px-5 sm:inline-flex" showArrow={false} />
             <button
               type="button"
@@ -95,6 +101,13 @@ export function Nav() {
                   {link.label}
                 </Link>
               ))}
+              <a
+                href="https://app.brainpal.com.au"
+                onClick={() => setOpen(false)}
+                className="rounded-2xl px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-brand-soft hover:text-brand-deep"
+              >
+                Sign in
+              </a>
               <GetEarlyAccess className="mt-2 w-full" />
             </nav>
           </motion.div>

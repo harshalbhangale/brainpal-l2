@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils";
 type PalId = "money" | "parent" | "tutor";
 const PAL: Record<PalId, { name: string; role: string; color: string; icon: LucideIcon }> = {
   money: { name: "MoneyPal", role: "Financial coach", color: "var(--money)", icon: Wallet },
-  parent: { name: "ParentPal", role: "Family coordinator", color: "var(--parent)", icon: Users },
+  parent: { name: "ParentPal", role: "School & admin", color: "var(--parent)", icon: Users },
   tutor: { name: "TutorPal", role: "Subject tutor", color: "var(--tutor)", icon: GraduationCap },
 };
 const CAST: PalId[] = ["money", "parent", "tutor"];

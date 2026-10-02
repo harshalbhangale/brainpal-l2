@@ -68,8 +68,8 @@ export const PALS: {
   {
     key: "parent",
     name: "ParentPal",
-    role: "Family coordinator",
-    quote: "Here's how today went.",
+    role: "School & admin",
+    quote: "Reads the school emails and calendars you connect, and tells you what to pay or sign.",
     colorVar: "var(--parent)",
     soft: "var(--parent-soft)",
   },

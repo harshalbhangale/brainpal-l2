@@ -100,6 +100,11 @@ const SECTIONS: LegalSection[] = [
             anonymised for internal operations.
           </li>
         </ul>
+        <p>
+          When you ask the assistant about your inbox, the sender, subject and short preview of the
+          matching emails are sent to our AI model provider to answer that one question. They are not
+          stored by BrainPal after the answer.
+        </p>
         <p><strong>Sharing</strong></p>
         <p>
           We transfer Google user data only to the service providers we need to run these features

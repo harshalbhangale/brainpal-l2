@@ -6,6 +6,7 @@ import { DayWithOliver } from "@/components/site/day-with-oliver";
 import { Money } from "@/components/site/money";
 import { Conversation } from "@/components/site/conversation";
 import { TutorPal } from "@/components/site/tutorpal";
+import { ParentPal } from "@/components/site/parentpal";
 import { HowItWorks } from "@/components/site/how-it-works";
 import { BrainCircles } from "@/components/site/brain-circles";
 import { AuthoritySafety } from "@/components/site/authority-safety";
@@ -26,6 +27,7 @@ export default function Home() {
         <Money />
         <Conversation />
         <TutorPal />
+        <ParentPal />
         <HowItWorks />
         <BrainCircles />
         <AuthoritySafety />

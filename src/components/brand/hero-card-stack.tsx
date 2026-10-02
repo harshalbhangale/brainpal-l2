@@ -19,9 +19,9 @@ type HeroCard = {
 };
 
 const HERO_CARDS: HeroCard[] = [
-  { id: "cap", name: "Captain", src: "/cards/cap.jpg", glow: "linear-gradient(135deg,#2563eb,#b91c1c)" },
-  { id: "iron", name: "Iron", src: "/cards/iron.jpg", glow: "linear-gradient(135deg,#dc2626,#f59e0b)" },
-  { id: "hulk", name: "Hulk", src: "/cards/hulk.jpg", glow: "linear-gradient(135deg,#4d7c0f,#6b21a8)" },
+  { id: "cap", name: "Striker", src: "/cards/cap.jpg", glow: "linear-gradient(135deg,#2563eb,#b91c1c)" },
+  { id: "iron", name: "Forge", src: "/cards/iron.jpg", glow: "linear-gradient(135deg,#dc2626,#f59e0b)" },
+  { id: "hulk", name: "Titan", src: "/cards/hulk.jpg", glow: "linear-gradient(135deg,#4d7c0f,#6b21a8)" },
 ];
 
 const BALANCE = "$30.00";
