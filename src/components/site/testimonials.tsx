@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import { TESTIMONIALS } from "@/lib/data";
 import { SectionHeading } from "@/components/brand/section-heading";
-import { Reveal, RevealStagger, RevealItem } from "@/components/brand/reveal";
+import { RevealStagger, RevealItem } from "@/components/brand/reveal";
 
 const AVATAR_TINTS = ["var(--brand)", "var(--study)", "var(--parent)"];
 
@@ -23,15 +23,6 @@ export function Testimonials() {
           kicker="Loved by families"
           title="Parents across Australia already trust BrainPal."
         />
-
-        <Reveal delay={0.08} className="mt-6 flex justify-center">
-          <div className="inline-flex items-center gap-3 rounded-full bg-white px-5 py-2.5 shadow-soft ring-1 ring-border">
-            <Stars />
-            <span className="text-sm font-semibold text-foreground">
-              Loved by 2,400+ early-access families
-            </span>
-          </div>
-        </Reveal>
 
         <RevealStagger className="mt-12 grid gap-6 md:grid-cols-3" amount={0.15}>
           {TESTIMONIALS.map((t, i) => (
